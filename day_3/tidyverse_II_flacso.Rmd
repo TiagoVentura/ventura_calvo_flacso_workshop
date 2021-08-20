@@ -1,0 +1,550 @@
+---
+title: "Tidyverse II: Tidyr, Stringr and Scopped Verbs"
+subtitle: "IPSA-Flacso Summer School"
+author: "Tiago Ventura"
+institute: ""
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+````{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(messagwese=FALSE, warning = FALSE)
+xaringanthemer::style_mono_accent(base_color ="#23395b", 
+                                  title_slide_text_color="#23395b", 
+                                  title_slide_background_color = "#fbf9f4", 
+                                  background_color = "#fbf9f4", 
+                                  link_color =  "#F21A00", 
+                                  code_font_size = "60%")
+
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE, error=TRUE, cache=TRUE)
+
+``` 
+
+
+# Introduction
+
+Yesterday, we had our first immersion in using tidyverse for data manipulation. 
+
+Today we will take a few new steps. 
+
+You will learn three new skills/packages:
+
+- Tidy your data, with `tidyr`
+
+- Manipulate strings, with `stringr`
+
+<!-- - Data manipulation on steroids, with scoped verbs.  -->
+
+---
+class:inverse, middle, center
+
+# Tidy Data.
+
+---
+
+## Tidy Data
+
+#### [Wickham, H. (2014). Tidy data. Journal of statistical software, 59(10), 1-23.](https://vita.had.co.nz/papers/tidy-data.pdf)
+
+The `tidyverse` framework comes from the concept of `tidy` data. Which means that all the packages on `tidyverse` work at full-speed when combined with a dataset organized in the tidy format. 
+
+A `tidy` data is just an specific way to organize your data. You can organize on different ways, but I will try to convice you about being consistent and having the tidy format as your baseline. 
+
+There are three interrelated rules which make a [dataset tidy](https://r4ds.had.co.nz/tidy-data.html). 
+
+- Each variable must have its own column.
+- Each observation must have its own row.
+- Each value must have its own cell.
+
+---
+
+# Visually
+
+![](./figs/tidy-1.png)
+
+---
+# Advantages
+
+These three simple definitions have several advantages:
+
+- It gives you a consistent way to organize our databases.
+
+- Saving one variable per column facilitates manipulation operations (R works better with column vectors).
+
+- Integrates with other `tidyverse` packages.
+
+---
+
+## Tidy Data: Gapminder
+
+```{r}
+library(gapminder)
+gapminder 
+```
+
+---
+
+## Tidy vs Untidy
+
+
+```{r out.width="30%", echo=FALSE}
+knitr::include_graphics("figs/untidy.png")
+```
+
+---
+
+## Untidy: Wide Data.
+
+Untidy data are usually referred as wide data. Some of your have already heard this term, I am sure. 
+
+
+```{r}
+wide <- tibble(pais=c("Brasil", "Uruguai", "Chile"), 
+               pres_ano_2010= c("Lula", "Mujica", "Pinera"), 
+               pres_ano_2014=c("Dilma", "Tabare", "Bachelet"), 
+               pres_ano_2018=c("Temer", "Lacalle", "Pinera"))
+wide
+```
+
+---
+
+## Challenge
+
+### Tidy or Untidy ?
+
+```{r}
+tab <- tibble(pais=c("Brasil", "Uruguai", "Argentina"),
+       i_2010 = c(5, 1, 2), 
+       i_2014 = c(10, 9, 9),
+       i_2018 = c(0, 1, 2))
+tab 
+```
+
+---
+
+### Tidy or Untidy ?
+
+```{r}
+tab1 <- tibble(pais=c("Brasil", "Argentina"),
+       ano = c(2020, 2020),
+       presidente_vice = c("Bolsonaro-Mourão", "Fernandez-Kirchner"))
+
+tab1 
+```
+
+---
+
+### Tidy or Untidy ?
+
+```{r}
+tab2 <- tibble(pais=c("Brasil", "Brasil",  "Argentina", "Argentina"),
+       ano = c(2020, 2020, 2020, 2020), 
+       covid = c("Casos", "Vacinas", "Casos", "Vacinas"), 
+       numero= c(10500000, 6535363, 2100000, 1800000))
+tab2
+```
+
+---
+
+# tidyr
+
+We will use the functions from the `tidyr` package to move between tidy<->untidy data.
+
+Four main functions:
+
+- `pivot_longer()`
+
+- `pivot_wider()`
+
+- `separate()`
+
+- `unite()`
+
+---
+
+## pivot_longer 
+
+### Multiple columns -> A single columns
+
+![](./figs/gather.png)
+
+
+Three main inputs:
+
+- `cols`: columns to pivot into longer format
+- `names_to`: A string specifying the **name** of the column to stores the **name* of the old columns.
+- `values_to`: A string specifying the **name** of the column to stores the **name* of the old columns.
+
+---
+
+## Exemplo
+
+```{r}
+
+# Before = Wide 
+wide
+
+# Pivoting
+
+wide %>%
+  pivot_longer(cols=c(pres_ano_2010, pres_ano_2014, 
+                      pres_ano_2018), 
+               names_to="presidente_ano", 
+               values_to="presidente")
+
+```
+
+---
+
+### Another Example:
+
+```{r}
+
+tab %>%
+  pivot_longer(cols = c(starts_with("i")), 
+               names_to="t", 
+               values_to="values")
+
+```
+
+---
+
+## pivot_wider 
+
+### (Openning one column -> Several)
+
+
+```{r out.width="80%", echo=FALSE}
+knitr::include_graphics("./figs/spread.png")
+```
+
+
+### Basics
+
+Two main inputs
+
+- `names_from`: name of the column with names to be opened.
+- `values_from`: name of the columns with values to be opened.
+
+---
+
+## Example
+
+```{r}
+tab2
+
+# untidying
+tab2 %>%
+  pivot_wider(names_from=covid, 
+              values_from=numero)
+```
+---
+
+## Exempla II: Filling NAs
+
+```{r}
+
+tab2 <- tab2 %>%
+        add_row(pais="Uruguai", 
+                ano=2020, 
+                covid="Casos", 
+                numero=8919)
+```
+
+--
+
+.pull-left[
+
+### With Missings.
+
+```{r}
+# tidying with Missings
+tab2 %>%
+  pivot_wider(names_from=covid, 
+              values_from=numero)
+
+```
+
+]
+
+--
+.pull-right[
+
+### Filling the Missings.
+
+```{r}
+
+# tidying Com Missings
+tab2 %>%
+  pivot_wider(names_from=covid, 
+              values_from=numero, 
+              values_fill=0) #<<
+
+```
+
+]
+--
+
+---
+## Separate and Unite
+
+Two last functions to conclude: `separate()` e `unite()`. 
+
+- `separate()`: Separate a character column into multiple columns with a regular expression
+
+- `unite()`: Unite multiple columns into one
+
+
+```{r}
+tab1 %>%
+  separate(presidente_vice, into=c("presidente", "vice"), 
+                            sep="-")
+```
+
+---
+class: middle, center, inverse
+
+## Manipulating Strings
+
+---
+
+## Strings
+
+Strings = a bunch of character variables. 
+
+
+We will learn several functions to manipulate strings in R. Fundamental for our future classes on scrapping and text analysis.
+
+Those functions are from the package `stringr`. And the package follows the `tidyverse` logic. 
+
+We will also conclude with an intro to regular expressions. 
+
+---
+## stringr
+
+The `stringr`, as all the other packages on tidyverse, is a verb-based package. This means that the name of the function intuitively explain its usage. 
+
+`stringr` functions have two components:
+
+- all the functions start with `str`
+
+- followed by the verb-based component ~> `str_remove` to remove some textual pattern. 
+
+See a complete list of the stringr functions [here](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
+
+---
+## Detect Textual Patterns
+
+Two components:
+
+- First Argument: textual input
+
+- Second Argument: textual pattern to be detected
+
+--
+
+`str_detect()`
+
+```{r}
+str_detect(c("Tiago", "Ventura"), "Ventura")
+```
+
+--
+
+`str_count()`
+
+```{r}
+str_count(c("Tiago", "Ventura"), "Ventura")
+```
+
+--
+
+---
+
+`str_locate()`
+
+```{r}
+str_locate(c("Tiago#umd", "Ventura#fgv"), "#")
+```
+
+---
+## Functions to Change Strings. 
+
+
+`str_replace_all()`
+
+```{r}
+str_replace_all(c("Tiago#umd", "Ventura#fgv"), "#", " ")
+```
+
+`str_to_lower()`
+
+```{r}
+str_to_lower(c("Tiago#umd", "Ventura#fgv"))
+```
+
+---
+## Working with dataframes
+
+As a package from `tidyverse`, the `stringr` functions were designs to work perfectly with dataframes/tibbles.
+
+
+### Downloading Candidates Data in Brazil. 
+
+Let's see some examples using an set political candidates' names from Brazil Legislative Elections.
+
+
+```{r}
+cand <- get_candidates(year=2018,
+                       position="Federal Deputy") %>%
+          as_tibble()
+
+```
+
+---
+
+## Stringr + Mutate
+
+Easy to create new variables. 
+
+```{r}
+cand %>%
+  select(NOME_URNA_CANDIDATO) %>%
+  mutate(nome_minusculo=str_to_lower(NOME_URNA_CANDIDATO))
+```
+
+---
+
+## Extract Textual Patterns
+
+Two main components
+
+- First Argument: textual input
+
+- Second Argument: Textual pattern. 
+
+```{r}
+nomes<-cand$NOME_URNA_CANDIDATO[1:10]
+```
+
+
+`str_sub()`: extract by position
+
+```{r}
+str_sub(nomes, 1, 5)
+```
+
+`str_subset()`: extract with a pattern
+
+```{r}
+str_subset(nomes, "PASTOR")
+```
+
+---
+
+
+`str_extract_all()`: extract only the pattern. 
+
+```{r}
+str_extract_all(nomes, "PASTOR|CHICO") # | = or
+```
+
+]
+
+---
+
+## How to write more general patterns?
+
+Quite often we look for more general patterns in our textual searches. For example:
+
+- All sentences that end with the letter "a"
+
+- All strings with numeric values.
+
+- All strings referring to Jair Bolsonaro and some variations of the name.
+
+To perform more general and flexible textual searches, we use `regular expressions`.
+
+Regular expressions are shortcuts that are almost the same across different programming languages. 
+
+It's not easy to memorize regular expressions, so here I will give you a general overview about these rules. 
+
+---
+## Regular Expression
+
+### Anchors
+
+- `^` starts with. 
+- `$` ends woth.
+
+```{r}
+tweets <- c("RT: Hello! Hello", "Hello World!")
+
+# starts with
+str_subset(tweets, "^RT")
+
+# Has !
+str_subset(tweets, "!")
+
+# ends with !
+str_subset(tweets, "!$")
+
+```
+
+---
+
+## Other Examples
+
+.pull-left[
+
+- `.`: any character.
+- `\d`: digits
+- \s: white space.
+- [abc]:  a, b, or c.
+- [^abc]: all except for a, b, ou c.
+
+]
+
+.pull-right[
+```{r}
+# start with R and any character.
+str_subset(tweets, "^R.")
+
+# Any digit
+str_subset(tweets, "\\d")
+
+# has one or the other
+str_detect(c("bolsonaro", "Bolsonaros"), "[b|B]olsonaro")
+```
+]
+
+---
+### Again... 
+
+--
+
+```{r out.width="80%"}
+knitr::include_graphics("https://media.giphy.com/media/8ykJ4yAnwgK2I/giphy.gif")
+```
+
+
+--
+
+---
+### Where to learn more
+
+- [google](https://www.google.com/search?q=how+to+capture+email+with+regilar+expression+in+r&oq=how+to+capture+email+with+regilar+expression+in+r&aqs=chrome..69i57j33l7.10663j0j9&sourceid=chrome&ie=UTF-8)
+
+- [summary](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
+
+
+

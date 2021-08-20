@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Tidyverse II: Tidyr, Stringr and Scopped Verbs</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Tiago Ventura" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tidyverse II: Tidyr, Stringr and Scopped Verbs
+## IPSA-Flacso Summer School
+### Tiago Ventura
+
+---
+
+
+
+
+# Introduction
+
+Today we will cover more advanced programming skills. They are:
+
+- Conditional Flow.
+- Functions.
+- Iteration.
+
+Mastering these skills will allow you to make all your work scalable and eventually more reproducible. 
+
+These concepts are general programming skills. Not specific to R. Honestly, once you learn the logic behind loops, conditionals, and functions, it is going to be easy for you to move through different programming languages. 
+
+---
+class: inverse, middle, center
+
+## Conditional Flow
+
+---
+## Conditional Flow
+
+It allows you to impose restrictions on your code. 
+
+- When should you run this?
+
+- Is this condition true?
+
+- Is this object a numeric?
+
+To do that, we use an these three main statements: `if`, `else` and `else if`
+---
+## if-else
+
+
+```r
+if (condition) {
+  # Code executed when condition is TRUE
+} else {
+  # Code executed when condition is FALSE
+}
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'condition' not found
+```
+
+
+Where:
+
+- condition = logical boolean statement. 
+
+---
+## Simple Example
+
+
+```r
+year=2022
+
+if(year&gt;2021){
+  print("Virtual Flacso -&gt; Tiago is not Travelling to Mexico")
+} else{
+  print("In person Flacso -&gt; Please, invite me to teach this course again!!!")
+}
+```
+
+```
+## [1] "Virtual Flacso -&gt; Tiago is not Travelling to Mexico"
+```
+
+
+```r
+year=2023
+
+if(year==2022){
+  print("Virtual Flacso -&gt; Tiago is not Travelling to Mexico")
+} else{
+  print("In person Flacso -&gt; Please, invite me to teach this course again!!!")
+}
+```
+
+```
+## [1] "In person Flacso -&gt; Please, invite me to teach this course again!!!"
+```
+
+---
+## Multiple Conditions
+
+The statement above was not very accurate. We need more than one condition. 
+
+We use `else if` statements. 
+
+
+```r
+year=2020
+
+if(year==2022|year==2021){
+  print("Virtual Flacso -&gt; Tiago is not Travelling to Mexico")
+} else if(year&gt;2022){
+  print("In person Flacso -&gt; Please, invite me to teach this course again!!!")
+} else if (year &lt;2021){
+  print("In person Flacso -&gt; but sorry Tiago, we cannot come back on time")
+}
+```
+
+```
+## [1] "In person Flacso -&gt; but sorry Tiago, we cannot come back on time"
+```
+
+Or just:
+
+
+
+```r
+year="2020"
+
+if(year==2022|year==2021){
+  print("Virtual Flacso -&gt; Tiago is not Travelling to Mexico")
+} else if(year&gt;2022){
+  print("In person Flacso -&gt; Please, invite me to teach this course again!!!")
+} else{
+  print("Your input is wrong. Or you want to come back on time")
+}
+```
+
+```
+## [1] "Your input is wrong. Or you want to come back on time"
+```
+---
+class:center, middle, inverse
+## Loops
+
+---
+# Loops
+
+As one quickly notes, doing any task in R can become redundant. Loops can dramatically increase the efficiency of our workflow when a task is _systematic and repeatable_.  
+
+Let's see a toy example.
+
+
+```r
+places_with_ilcss &lt;- c("Buenos Aires",
+                       "College Park", 
+                       "Mexico City")
+
+# for loop
+
+for(cities in places_with_ilcss){ #iterador
+  # repeating
+  print(cities)
+}
+```
+
+```
+## [1] "Buenos Aires"
+## [1] "College Park"
+## [1] "Mexico City"
+```
+
+
+---
+
+## What is this doing?
+
+
+```r
+cities &lt;- places_with_ilcss[1]
+print(cities)
+```
+
+```
+## [1] "Buenos Aires"
+```
+
+
+
+```r
+cities &lt;- places_with_ilcss[2]
+print(cities)
+```
+
+```
+## [1] "College Park"
+```
+
+
+
+```r
+cities &lt;- places_with_ilcss[3]
+print(cities)
+```
+
+```
+## [1] "Mexico City"
+```
+
+---
+## Components of a for loop
+
+
+**`for(item in group_of_items)`: the sequence**
+
+  - item: index for each repetition.
+    
+  - group_of_items:  object we are drawing the item from
+  
+
+--
+
+**Parenthesis {}**
+
+  - What it is to be repeated goes here. 
+  
+  
+--
+
+**Containers**
+
+  - Created outside of the loop. 
+  
+  - Object to save all your outputs. 
+
+--
+
+---
+
+## A more realistic example. 
+
+
+```r
+##devtools::install_github("apreshill/bakeoff")
+library(bakeoff)
+data("ratings_seasons")
+```
+
+We want to calculate the average number of views per season. 
+
+
+```r
+# How many Seasons?
+temporadas &lt;- unique(ratings_seasons$series)
+temporadas
+```
+
+```
+## [1] 1 2 3 4 5 6 7 8
+```
+
+```r
+# Average Views
+
+#Temporadas
+temporada_1 &lt;- ratings_seasons[ratings_seasons$series==temporadas[1],]
+temporada_2 &lt;- ratings_seasons[ratings_seasons$series==temporadas[2], ]
+temporada_3 &lt;- ratings_seasons[ratings_seasons$series==temporadas[3], ]
+
+# Take the mean
+
+mean(temporada_1$viewers_7day)
+```
+
+```
+## [1] 2.77
+```
+
+---
+
+## Building our loop: Computationally Thinking. 
+
+
+1. Think about and specify the length of something you want to loop through. In our case, it's the number of seasons.
+
+2. Set the code up so that every iteration only performs a manipulation on a single subset at a time.
+
+3. Save the contents of each iteration in a new object that won't be overwritten. Here we want to think in terms of "stacking" results or concatenating them. 
+
+In practice... read your code, see what is repeating, and make it general. 
+
+---
+
+
+```r
+# Containes
+container &lt;- list()
+
+for(i in 1:length(temporadas)){ # Step  1
+  
+ # step 2  
+ temp=ratings_seasons[ratings_seasons$series==temporadas[i], ] 
+ 
+ # Step 3
+ container[[i]] &lt;- mean(temp$viewers_7day)  
+  
+}
+container
+```
+
+```
+## [[1]]
+## [1] 2.77
+## 
+## [[2]]
+## [1] 3.95125
+## 
+## [[3]]
+## [1] 5.001
+## 
+## [[4]]
+## [1] 7.354
+## 
+## [[5]]
+## [1] 10.0393
+## 
+## [[6]]
+## [1] 12.311
+## 
+## [[7]]
+## [1] 13.563
+## 
+## [[8]]
+## [1] 9.017
+```
+
+---
+class:center, middle, inverse
+## Loops
+
+---
+## What are Functions?
+
+**Everything that generates an output in R is a function.**
+
+
+```r
+x&lt;- c(1, 2, 3, 4, 5)
+
+# Mathematical Functions in R
+sum(x, na.rm = TRUE) 
+```
+
+```
+## [1] 15
+```
+
+```r
+log(x) 
+```
+
+```
+## [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379
+```
+
+```r
+sqrt(x)
+```
+
+```
+## [1] 1.000000 1.414214 1.732051 2.000000 2.236068
+```
+
+```r
+mean(x)
+```
+
+```
+## [1] 3
+```
+
+---
+
+## Inputs, outputs and arguments. 
+
+As we learned in our basic math course, a function maps a input to an output. The logic is the same in R. 
+
+Every function has the following components:
+
+- inputs: most of times an object you send in to the function. 
+
+- outputs: the results of the function. 
+
+- arguments: specify how the function works. 
+
+
+```r
+# Lets see how the mean function works
+?mean
+```
+
+---
+
+## Creating our own functions. 
+
+.pull-left[
+
+
+```r
+some_me &lt;- function( argument1, argument2 ){
+  
+  value &lt;- argument1 + argument2
+  
+  return(value) # "return" define the output 
+}
+
+some_me(2,3)
+```
+
+```
+## [1] 5
+```
+
+```r
+some_me(100,123)
+```
+
+```
+## [1] 223
+```
+
+```r
+some_me(60,3^4)
+```
+
+```
+## [1] 141
+```
+
+]
+
+
+.pull-right[
+
+Components:
+
+- **name**: some_me;
+
+- **argument**: argument1 e argument2;
+
+- **body**: everything inside of {}; 
+
+- **return**: output.
+]
+
+---
+
+#### Another More General Example 
+
+
+```r
+nome_da_funcao &lt;- function(x,y,z){ ## Argumentos
+  ### Corpo: o que a função faz
+   	
+    out &lt;- what the function does.
+  
+  ### Conclui Corpo.
+    
+  	return(out) ## output
+}
+  ## fecha a função
+```
+
+---
+
+## When should you write a function?
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+$$
+\texttt{"You should consider writing a function whenever} \\
+$$
+
+$$
+\texttt{you’ve copied and pasted a block of code more than twice"}
+$$
+
+--- 
+### Applying a function to multiple objects. 
+
+Most of times, we will use our functions across different tasks. These taks can be distinct codes, or just distinct objects. 
+
+This is particular important on scrapping digital data, where we usually write a function to collect information from one page, and then scale-up to several others.
+
+There are three  different ways we can scale up our functions. 
+
+- Loops
+
+- apply functions
+
+- `purr::map` 
+
+
+We will conclude today learning more about the `map` functions from the `purrr` package.
+
+---
+## First, some references
+
+We will just introduce you to the beautiful world of `purrr`. If you want to learn more, you shoudl see these tutorials. 
+
+- [aqui](https://jennybc.github.io/purrr-tutorial/), 
+
+- [aqui](http://www.rebeccabarter.com/blog/2019-08-19_purrr/), and 
+
+- [aqui](https://www.youtube.com/watch?v=bzUmK0Y07ck). 
+
+---
+### Purrr
+
+`Purrr` is a tidyverse packages that introduces `map` functions. 
+
+These functions are all about iteration (like loops). But in a cleaner and more consistent way. 
+
+Let's see an example. We will go through three steps. 
+
+- Create ten dataframes and save as a .csv
+
+- Open all of them with a loop. 
+
+- Then open all of them with map. 
+
+---
+## Create some  dataframes
+
+
+```r
+# create a dir
+dir.create("fake_data")
+
+for(i in 1:10){
+d &lt;- tibble(n=1000, 
+            norm=rnorm(n, 0, 1), 
+            unif=runif(n, 0,1))
+write.csv(d, paste0("fake_data/data", i,".csv"))
+}
+```
+
+--- 
+## Open with a loop
+
+
+```r
+# create container
+data &lt;- list()
+
+# iterator
+path=paste0("./fake_data/", list.files("./fake_data"))
+
+# the loop
+for(i in 1:length(path)){
+data[[i]] &lt;- read.csv(path[[i]])  
+}
+str(data, 1)
+```
+
+```
+## List of 10
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+##  $ :'data.frame':	1000 obs. of  4 variables:
+```
+
+--- 
+## Using Map
+
+
+```r
+# simple map = output is a list
+l &lt;- map(path, read.csv)
+
+# and some extensions
+l &lt;- map_dfr(path, read.csv)
+
+# Check
+glimpse(l)
+```
+
+```
+## Rows: 10,000
+## Columns: 4
+## $ X    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 2…
+## $ n    &lt;int&gt; 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000…
+## $ norm &lt;dbl&gt; -1.0257732, 0.1743787, -0.6586709, 0.7531967, 0.2519671, -0.1605470, 0.1233917, -1.6385938, -1.45546…
+## $ unif &lt;dbl&gt; 0.601772254, 0.625265910, 0.003362833, 0.210245239, 0.847103945, 0.343327926, 0.508232250, 0.3735547…
+```
+
+
+
+---
+## Maps Functions
+
+A map function is one that applies the same action/function to every element of an object (e.g. each entry of a list or a vector, or each of the columns of a data frame).
+
+The output is determined by the term that follows the `map`. As such:
+
+- `map(.x, .f)` is the main mapping function and returns a list
+
+- `map_df(.x, .f)` returns a data frame
+
+- `map_dbl(.x, .f)` returns a numeric (double) vector
+
+- `map_chr(.x, .f)` returns a character vector
+
+- `map_lgl(.x, .f)` returns a logical vector
+
+---
+### More Examples
+
+
+```r
+# Create a List
+lista1 &lt;- list(a=rnorm(1000, 0, 1),
+               b=rnorm(1000, 1, 1), 
+               c=rnorm(1000, 10, 1))
+
+
+# Apply a function to all the elements of a list
+map(lista1, mean)
+```
+
+```
+## $a
+## [1] 0.01817143
+## 
+## $b
+## [1] 1.001422
+## 
+## $c
+## [1] 10.00197
+```
+
+```r
+# same  as:
+mean(lista1$a)
+```
+
+```
+## [1] 0.01817143
+```
+
+```r
+mean(lista1$b)
+```
+
+```
+## [1] 1.001422
+```
+
+```r
+mean(lista1$c)
+```
+
+```
+## [1] 10.00197
+```
+
+---
+### map_df
+
+
+```r
+map_df(lista1, mean)
+```
+
+```
+## # A tibble: 1 x 3
+##        a     b     c
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.0182  1.00  10.0
+```
+
+---
+## The tilde-dot shorthand for functions
+
+
+To make the code more concise you can use the tilde-dot shorthand for anonymous functions. This shortcut basically allows you to work with arguments of functions inside of the map. 
+
+
+
+```r
+# With tilde
+map(lista1, ~ log(abs(sum(.x))) + 100)
+```
+
+```
+## $a
+## [1] 102.8999
+## 
+## $b
+## [1] 106.9092
+## 
+## $c
+## [1] 109.2105
+```
+
+```r
+# With anonymous functions 
+map(lista1, function(x) log(abs(sum(x))) + 100)
+```
+
+```
+## $a
+## [1] 102.8999
+## 
+## $b
+## [1] 106.9092
+## 
+## $c
+## [1] 109.2105
+```
+
+Super brief introduction to purrr. We will learn more tomorrow with our scrapping classes. 
+
+
+---
+class:center, middle, inverse
+
+## Gracias!!
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
