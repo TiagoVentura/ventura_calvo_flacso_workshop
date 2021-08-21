@@ -911,6 +911,203 @@ class: middle, center, inverse
 
 class: middle, center, inverse
 
-### See you again Tomorrow!
+### Do we still have time?
+
+---
+
+# Scoped Vebs in dplyr
+
+---
+
+## What are they?
+
+`dplyr` on steroids.
+
+#### Main usages:
+
+- Allows the use of dplyr verbs on multiple variables all at once. 
+
+#### Examples:
+
+- `summarise_at`, `mutate_at`,`filter_at`,
+
+- `select_if`, `mutate_if`, `filter_if`.
+
+- `rename_all`, `mutate_all`, `summarise_all`.
+
+---
+## Brazilian Electoral Data.
+
+```{r}
+
+library(cepespR)
+library(tidyverse)
+d <- get_votes(year = 2018, 
+                         position = "Federal Deputy", 
+                         regional_aggregation = "Municipio", 
+                         state="RJ") %>%
+                  as_tibble()
+cand <- get_candidates(year=2018,
+                       position="Federal Deputy") %>%
+          as_tibble()
+
+```
+
+---
+## `function_if`: 
+
+###  Perform an operation on variables that satisfy a logical criteria
+
+#### Basics
+
+      function_if(logical_criteria, function implementing operations)
+      
+      
+---
+## select_if
+
+```{r}
+d %>%
+  select_if(is.numeric)
+```
+
+---
+## mutate_if
+
+Mutate columns that satisfy specified logical conditions.
+
+```{r}
+d %>% 
+  mutate_if(is.character, str_to_title) 
+
+```
+
+---
+## mutate_if: with different names
+
+```{r}
+d %>% 
+  # extra trick if you want to change the name of the variables. 
+  mutate_if(is.character, list(to_title= ~ str_to_title(.x))) 
+```
+
+---
+
+## summarise_if
+
+```{r}
+d %>% 
+  summarise_if(is.numeric, max)
+```
+
+---
+## `function_at`
+
+### perform an operation only on variables specified by name
+
+
+    verb_at(vars(variables), fun(CHANGES))
+    
+
+---
+
+## mutate_at
+
+```{r}
+cand %>%
+ mutate_at(vars(contains("DESCRICAO")), 
+                 str_to_lower) %>%
+  select(contains("DESCRICAO"))
+```
+
+---
+
+## Rename_at
+
+```{r}
+cand %>%
+  rename_at(vars(ends_with("CARGO")), 
+            ~ str_replace(.x, "CARGO", "Cargo")) %>%
+  select(contains("Cargo"))
+```
+
+---
+
+## OK.. WAIT...Tiago... what is this `~`?
+
+The tilde-dot is a shortcutfor anonymous functions. This shortcut basically allows you to work with arguments of functions inside of the map. We will see more of it tomorrow. 
+
+But let go through an example
+
+---
+
+## Example
+
+.pull-left[
+```{r}
+cand %>%
+  rename_at(vars(ends_with("CARGO")), 
+            ~ str_replace(.x, "CARGO", "Cargo")) %>%
+  select(contains("Cargo"))
+
+```
+]
+
+.pull-right[
+
+```{r}
+cand %>%
+  rename_at(vars(ends_with("CARGO")), 
+            function(x) str_replace(x, "CARGO", "Cargo")) %>%
+  select(contains("Cargo"))
+
+```
+
+]
+
+---
+
+## `function_all`
+
+### Perform alteration on all the variables.
+
+      function_all(var=all_by_default, função)
+      
+
+---
+
+### Mutate_all
+
+```{r}
+cand %>%
+  mutate_all(str_trim)   
+
+```
+
+---
+
+### Summarize_all
+
+An more meaningful example with mtcars.
+
+```{r}
+mtcars %>%
+  summarise_all(mean)
+```
+
+---
+## Rename_all: with our `~`
+
+```{r}
+cand %>%
+  rename_all(~ str_replace_all(.x, "_", "x"))
+```
+
+---
+class: inverse, middle, center. 
+
+### that`s is enough for today. 
+
+#### See you tomorrow
 
 
