@@ -111,9 +111,6 @@ Text Minning with R
 - [Ch. 6: Topic modeling](https://www.tidytextmining.com/topicmodeling.html) 
 
 
-
-
-
 ## Materials
 
 All the materials are available in this repo. If you are familiar with git, you can just clone this repository locally, and get access to everything in just one place.
