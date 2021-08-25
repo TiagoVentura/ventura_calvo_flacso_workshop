@@ -30,7 +30,13 @@ During week one, we cover several topics I would put under a *Crash Course do Da
 
 The structure of the course is simple. The morning will be focused on lectures and coding example. We will embed some coding exercises during our morning lectures, however, most of the time we will focus on me going through some code and presentation with you. For the afternoons, you will have some practice questions, as well as the opportunity to work through the code we discussed during the morning lectures. 
 
-Our syllabus is available here. The presentation and code for each section goes below. 
+Our syllabus is available [here](). The presentation and code for each section goes below. 
+
+### Pre-Arrival.
+
+I prepared a tutorial where you can find some help on how to install the softwares we will be using in this workshop. Please, run through this tutorial before the first day of class. 
+
+The tutorial is [here](https://github.com/TiagoVentura/ventura_calvo_flacso_workshop/blob/main/install_fest.md)
 
 ### Day I
 
@@ -38,15 +44,43 @@ Our syllabus is available here. The presentation and code for each section goes 
 
 - Intro to R ([Presentation](), [Code]())
 
+**Exercises and Readings for the Lab**
+
+
+- Chapter 5 of [Hands-On Programming with R](https://rstudio-education.github.io/hopr/r-objects.html)
+-  Carpentry Classes on [Data Types and Structures](https://swcarpentry.github.io/r-novice-inflammation/13-supp-data-structures/index.html), [Data Subsetting](https://swcarpentry.github.io/r-novice-gapminder/06-data-subsetting/index.html),  [Read and Write `.csv` files](http://swcarpentry.github.io/r-novice-inflammation/11-supp-read-write-csv/index.html)
+
+
 ### Day II: Tidyverse and Data Wrangling
 
 - Introduction to Tidyverse([Presentation](), [Code]())
 
+**Exercises and Readings for the Lab**
+
+R for Data Science
+
+- [Ch. 5: Data Transformation](https://r4ds.had.co.nz/transform.html) - `r4ds`
+- [Ch. 13: Relational Data](https://r4ds.had.co.nz/relational-data.html) - `r4ds`
+- [Ch. 18: Pipes](https://r4ds.had.co.nz/pipes.html) - `r4ds`
+- [Ch. 10: Tibbles](https://r4ds.had.co.nz/tibbles.html) - `r4ds`
+
+
 ### Day III: Tidyverse II + Functional Programming + Loops
 
-- Strings in R and Scopped Verbs ([Presentation](), [Code]())
+- TTidyverse II: Tidy Data + Strings in R ([Presentation](), [Code]())
 
 - Functional Programming + Loops ([Presentation](), [Code]())
+
+**Exercises and Readings for the Lab**
+
+R for Data Science:
+
+- [Ch. 12: Tidy Data](https://r4ds.had.co.nz/tidy-data.html)
+- [Ch. 14: Strings](https://r4ds.had.co.nz/strings.html) 
+- [Ch. 19: Functions](https://r4ds.had.co.nz/functions.html)
+- [Ch. 21: Iteration](https://r4ds.had.co.nz/iteration.html)]
+
+Rebeccas Barter Tutorial on [Purrr](https://www.rebeccabarter.com/blog/2019-01-23_scoped-verbs/) and [Scopped Verbs in R](https://www.rebeccabarter.com/blog/2019-08-19_purrr/)
 
 ### Day IV: Acessing Digital Data
 
@@ -54,10 +88,30 @@ Our syllabus is available here. The presentation and code for each section goes 
 
 -  APIs ([Presentation](), [Code]())
 
+**Exercises and Readings for the Lab**
+
+Check out all the excelente materials by Chris Bail on text analysis in R. 
+
+- [Digital Trace Data](https://cbail.github.io/textasdata/strengths-weaknesses/rmarkdown/Strengths_and_Weaknesses.html)
+- [Screen Scrapping](https://cbail.github.io/textasdata/screenscraping/rmarkdown/Screenscraping_in_R.html)
+- [APIs](https://cbail.github.io/textasdata/apis/rmarkdown/Application_Programming_interfaces.html)
 
 ### Day V: Intro do Text-Analysis (Tidy approach)
 
-- Text analysis with tidy text ([Presentation](), [Code]())
+- Text analysis with tidy text ([Code]())
+
+**Exercises and Readings for the Lab**
+
+Text Minning with R
+
+- [Ch. 1: The tidy text format](https://www.tidytextmining.com/tidytext.html) 
+- [Ch. 2: Sentiment analysis with tidy data](https://www.tidytextmining.com/sentiment.html) 
+- [Ch. 3: Analyzing word and document frequency: tf-idf](https://www.tidytextmining.com/tfidf.html)  
+- [Ch. 5: Converting to and from non-tidy formats](https://www.tidytextmining.com/dtm.html) 
+- [Ch. 6: Topic modeling](https://www.tidytextmining.com/topicmodeling.html) 
+
+
+
 
 
 ## Materials
