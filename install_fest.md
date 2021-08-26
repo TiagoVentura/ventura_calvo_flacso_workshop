@@ -1,164 +1,180 @@
 Intro
 =====
 
-Para participar do nosso curso
-`Introdução a Métodos Computacionais Para Ciências Sociais` será
-necessário que os alunos e alunas possuam um conjunto de programas
-instalado em seus laptops. Neste primeiro tutorial, ensino aos alunos
-como instalar estes programas.
+This tutorial will introduce you to the main softwares we will be using
+throughout our workshop. You need to run this tutorial to have
+everything in place to fully participated in our classes.
 
 R
 =
 
-Usaremos **R** como software e linguagem de programação neste curso. O R
-é uma linguagem de programação gratuita, extremamente flexível e com uma
-comunidade de suporte excelente. É hoje um dos softwares mais utilizado
-por cientistas sociais e cientistas de dados, em geral. Por isto, optei
-pelo uso do R.
+We will use **R** as the software and programming language in this
+course. R is a free programming language, extremely flexible and with an
+excellent support community. It is now one of the most used software by
+social scientists and data scientists in general. For this reason, I
+chose to use R.
 
-Uma pergunta super frequente quando ensino cursos como este é: **Porquê
-o R?**. A resposta para mim é simples: o R é imbatível no que se refere
-a manipulação de bancos de dados – daqueles retangulares estilo excel –
-visualização de dados e modelagem estatística. Junto disso, o R é uma
-linguagem de programação, o que permite a você fazer tudo que outras
-linguagens mais gerais fazem, e ainda ter os benefícios de manipulação,
-visualização e modelagem acima citados.
+A super frequently asked question when I teach other iterations of this
+workshop is: **Why R?**. The answer for me is simple: R is unbeatable
+when it comes to manipulating databases (the rectangular Excel-style
+datasets we love), data visualization and statistical modeling. In
+addition, R is also a programming language, which allows you to do
+everything that other more general languages do, together with the
+excelent features with regards to data manipulation, visualization, and
+modeling tools mentioned above.
+
+Below you can see how to install R on your local machine.
 
 ### Windows
 
-Para instalar o R no Windows, o primeiro passo é fazer o download do
-programa. Para isso, entre [neste
-link](https://cran.r-project.org/bin/windows/base/) e clique em
-“Download R 4.03 for Windows”.
+To install R on Windows, the first step is to download the program. To
+do this, enter [this link](https://cran.r-project.org/bin/windows/base/)
+and click on “Download R 4.03 for Windows”.
 
-Você fará o Download, e o arquivo estará salvo, provavelmente, na sua
-pasta de Downloads. Vá nesta pasta, clique duas vezes no arquivo e
-inicie a instalação do **R**.
+You will download it, and the file will probably be saved in your
+Downloads folder. Go to this folder, double click on the file and start
+installing **R**.
 
 ### Mac OS
 
-Para instalar o R no Mac OS, o primeiro passo é fazer o download do
-programa. Para isso, entre [neste
-link](https://cran.r-project.org/bin/macosx/) e clique em “Download R
-4.03”.
+To install R on Mac OS, the first step is to download the program. To do
+this, enter [this link](https://cran.r-project.org/bin/macosx/) and
+click on “Download R 4.03”.
 
-RStudio.
-========
+Rstudio
+=======
 
-O **R** é uma linguagem de programação que, após instalada, pode ser
-utilizada de formas variadas em seu computador. Você pode usá-lo a
-partir da sua linha de comando, como programadores mais experientes
-costumam fazer, ou você pode usar softwares desenvolvidos com o intuito
-de faciliar o uso de determinada linguagem de programação. Estes
-softwares são chamados ambiente de desenvolvimento integrado (IDE)
+**R** is a programming language that, after you install it, you can
+access on your computer on many different ways. You can call **R** from
+your command line, as old-school programmers usually do. Or you can use
+other softwar and programs developed to make the usage of the language
+more intuitive. These softwares are called IDEs – integrated development
+environment.
 
-O IDE mais utilizado em R chama-se **RStudio**. Sem aprofundar em
-conceitos da ciência computação, o R Studio consiste em um programa que
-integra o R com outras ferramentas, e torna o uso do R mais intuitivo.
-Por exemplo, o R Studio possui integrações com outros softwares, permite
-que várias tarefas sejam feitas com point-and-click, permite
-**auto-completio** das funções e indica quando há erros em seu código.
+The most famous and useful IDE for R is called **RStudio**. Without
+goint O IDE mais utilizado em R chama-se **RStudio**. Without delving
+into computer science concepts too much, R Studio consists of a program
+that integrates R with other tools, and makes using R more intuitive.
+For example, R Studio is already integrated with other programs (like
+git), allows multiple tasks to be done with point-and-click, allows
+**auto-completion** of programming functions and indicates when there
+are errors in your code.
 
-Para fazer o download do RStudio, você clica
-[aqui](https://rstudio.com/products/rstudio/download/). Escolha a versão
-correspondente ao seu sistema operacional.
+To download RStudio, you can click
+[here](https://rstudio.com/products/rstudio/download/). You should
+choose the version corresponding to your operating system.
 
-Depois de instalado, para usar o R, você pode abrir diretamente o R
-Studio, e estaremos prontos para começar a programar.
+Once installed, to use R, you can go directly to R Studio, and open it.
+Then we’re ready to start programming.
 
-Entendendo o RStudio.
-=====================
+R Studio Tutorial
+-----------------
 
-Esta seção é uma breve introdução ao RStudio. Vamos discutir isso mais
-vezes na próxima semana.
+Tools –\> Global Options
+------------------------
 
-Navegando no R Studio.
-======================
+Before we begin, let’s set a few RStudio settings to improve your
+experience.
 
-![](rstudio.png)
+1.  Click “Tools –\> Global Options –\> Appearance” to change your color
+    and font settings.
 
-Noções básicas: Navegando no RStudio
-====================================
+2.  Click “Tools –\> Global Options –\> Code” and check the box that
+    says “Soft-wrap R source files” to wrap the text in your script to
+    the width of the script pane.
 
-Abra o RStudio! Em seguida, abra um novo script clicando em “Arquivo -\>
-Novo arquivo -\> Script R” ou pressionando `Ctrl + Shift + N` (PC)
-ou`command + shift + N` (Mac). Depois de abrir um novo script, você verá
-quatro “painéis”.
+3.  Click “Tools –\> Global Options –\> Code –\> Display” and check the
+    boxes that say “Highlight selected line” and “Highlight R function
+    calls”.
 
-Painel superior esquerdo (entrada / script)
--------------------------------------------
+The basics: Navigating RStudio
+==============================
 
-Neste painel, você escreve seu código. Digite `2 + 2` no seu script e
-execute uma linha de código pressionando`command + enter` (Mac) ou
-`Ctrl + enter` (PC). Ou clique no botão “Executar” na parte superior do
+Open RStudio! Then, open a new script by clicking “File –\> New File –\>
+R Script” or by pressing `Ctrl + Shift + N` (PC) or
+`command + shift + N` (Mac). After opening a new script, you should see
+four window “panes”.
+
+Top left pane (input/script)
+----------------------------
+
+Enter code in this savable `script` file in the top left pane. This is a
+plain text file but with a .R extension. Enter `2 + 2` in your script
+and run a line of code by pressing `command + enter` (Mac) or
+`Ctrl + enter` (PC). Or, click the “Run” button at the top of the
 script.
 
-Uma hashtag `#` diz ao R que você não deseja que essa linha ou bloco de
-código seja executado - isso é chamado de **comentando seu código**.
-Isso é útil para você fazer anotações e pode até adicionar hashtags após
-linhas de código executável, na mesma linha.
+A hashtag `#` tells R that you do not want that particular line or block
+of code to be run - this is called **commenting your code**. This is
+handy for making notes to yourself and you can even add hashtags after
+lines of runable code, on the same line.
 
-O nome do seu arquivo de script está na guia na parte superior da janela
-do script - o nome padrão é `Untitled1`. Certifique-se de salvar seu
-script clicando em “Arquivo -\> Salvar” ou `command + s` (Mac)
-ou`Ctrl + s` (PC). Você também pode clicar no ícone de disquete para
-salvar.
+The name of your script file is in the tab at the top of your script
+window - the name defaults to `Untitled1`. Be sure to save your script
+by clicking “File –\> Save” or `command + s` (Mac) or `Ctrl + s` (PC).
+You can also click the floppy disk icon to save.
 
-Painel inferior esquerdo (saída / console)
-------------------------------------------
+Bottom left pane (output/console)
+---------------------------------
 
-O resultado do código é exibido no \`console ’no painel inferior
-esquerdo. Esse espaço também é bom para procurar e experimentar o código
-que você não deseja salvar em seu script.
+Code output is displayed in the `console` in the bottom left pane. This
+space is also good for just noodling around and trying out code that you
+do not wish to save in your script.
 
-No console, o prompt `>` aparece um símbolo maior que. Se o seu prompt
-começar a parecer um símbolo `+` por engano, basta clicar no console e
-pressionar a tecla `esc` no teclado quantas vezes forem necessárias para
-retornar ao prompt.
+In the console, the prompt `>` looks like a greater than symbol. If your
+prompt begins to look like a `+` symbol by mistake, simply click in your
+console and press the `esc` key on your keyboard as many times as
+necessary to return to the prompt.
 
-R usa `+` quando o código é dividido em várias linhas e R ainda espera
-mais código. Uma linha de código geralmente não termina até que R
-encontre um parâmetro ou pontuação de parada apropriado que conclua
-algum código, como parêntese fechado fechado `)`, colchete `]`, colchete
-`}` ou aspas \```.
+R uses `+` when code is broken up across multiple lines and R is still
+expecting more code. A line of code does not usually end until R finds
+an appropriate stop parameter or punctuation that completes some code
+such as a closed round parenthesis `)`, square bracket `]`, curly brace
+`}`, or quotation mark `'`.
 
-Painel superior direito (ambiente global)
------------------------------------------
+If the output in your console gets too messy, you can clear it by
+pressing `control + l` on both Mac and PC. This will not erase any saved
+data - it will simply make your console easier to read.
 
-Os dados são salvos na memória de R como **objetos**. Os objetos são
-simplesmente espaços reservados para um valor, expressão matemática,
-palavra, função ou conjunto de dados! A guia “Ambiente” global no painel
-superior direito exibe as variáveis que você atribuiu / salvou.
+Top right pane (global environment)
+-----------------------------------
 
-Painel inferior direito (arquivos, plotagens, pacotes e ajuda)
---------------------------------------------------------------
+Data are saved in R’s memory as “variables”. Variables are simply
+placeholders for a value, mathematical expression, word, function, or
+dataset! The global “Environment” tab in the upper right pane displays
+the variables you have assigned/saved. “Global” simply means that these
+variables are available for any task.
 
-Aqui você encontra guias úteis para navegar no sistema de arquivos,
-exibir gráficos, instalar pacotes e visualizar páginas de ajuda.
-Pressione a tecla `control` e um número (1 a 9) no teclado para atalho
-entre esses painéis e guias.
+Bottom right pane (files, plots, packages, and help)
+----------------------------------------------------
+
+Here you find useful tabs for navigating your file system, displaying
+plots, installing packages, and viewing help pages. Press the `control`
+key and a number (1 through 9) on your keyboard to shortcut between
+these panes and tabs.
 
 ### <span style="color:#e13d3d"> EXTRA: Instalando pacotes no R </span>
 
-Existem vários pacotes que são fornecidos com a distribuição básica do
-R. Eles são conhecidos como [pacotes
-básicos](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html).
-Porém, há pacotes criados por desenvolvedores que precisamos instalar no
-R.
+There are a number of `packages` that are supplied with the R
+distribution. These are known as \`\`[base
+packages](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)"
+and they are in the background the second one starts a session in R.
 
-Pacotes são coleções de funções, dados e códigos compilados juntamente.
-Os passos para instalar e ativar um pacote são os seguintes.
+Packages are collections of R functions, data, and compiled code in a
+well-defined format. To use a package you need to go through the
+following steps:
 
-1.  Instalar o pacote – **somente uma vez**.
-2.  Ativar (library) o pacote – **sempre que abrir uma seção no R**.
+1.  Install the package – **only once**.
+2.  Activate the package – **every time you open a new R session**.
 
-Por diversas vezes, aparecem alguns conflitos entre pacotes, ou de
-pacotes com outras dependências em seu R. Por isso, adicionei essa
-sessão extra em que você poderá instalar alguns pacotes bastantes úteis
-em seus R.
+On several occasions you will see conflicts appearing between packages,
+or errors from packages with other dependencies in your machine. That’s
+why I added this extra section where you can install some very useful
+packages in your R. These are the main packages we will use in this
+workshop.
 
-Copie e cole essas linhas abaixo e rode (command + enter`(Mac) ou`Ctrl +
-enter\` (PC)) cada linha para instalar os pacotes.
+Copy and paste these lines below and run (command + enter`(Mac) or`Ctrl
++ enter\` (PC)) each line to install the packages.
 
 ``` r
 # Instalando um pacote. 
@@ -186,58 +202,59 @@ install.packages("xml2") # scrapping
 install.packages("electionsBR") # dados eleitorais no Brasil
 ```
 
-### <span style="color:#e13d3d"> EXTRA II: Apareceu algum erro? </span>
+### <span style="color:#e13d3d"> EXTRA II: Any error? </span>
 
-Não se preocupe! Erros na instalação de pacotes são muito comuns. E
-dentre os elementos mais úteis do uso do R é o grande número de recursos
-disponíveis on-line e uma excelente comunidade de programadores
-dispostos-as a ajudar a solucionar estes problemas.
+Do not worry! Errors in installing packages are very common. And among
+the most useful elements of using R is the large number of resources
+available online and an excellent community of programmers willing to
+help you going through these problems.
 
-Em primeiro lugar, Se você tiver problemas para instalar pacotes,
-certifique-se de que está conectado à internet e que
+First, if you have problems installing packages, make sure you are
+connected to the internet and that
 <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>
-não está bloqueado por seu firewall ou proxy.
+is not blocked by your firewall or proxy.
 
-Em segundo lugar, busque ajuda no google. Eu programo em R há quase dez
-anos, e não faço absolutamente nada sem utilizar pedir ajuda no google.
-Pedir ajuda on-line é simples: copie e cole a mensagem de R no google. E
-vá buscar as soluções. O principal site de soluções se chama
-**stackoverlflow**. Boa parte das soluções de lá resolverão seus
-problemas.
+Second, look for help on google. I’ve been programming in R for almost
+ten years, and I cannot programm without asking for help on google.
+Asking for help online is simple: copy and paste R’s message into
+google. And go get the solutions. The main solutions site is called
+**stackoverlflow**. Most of the solutions there will solve your
+problems.
 
 RMarkdown
 ---------
 
-Daqui há duas semanas, iremos aprender sobre as potencialidades do
-pacote `Rmarkdown`. Este pacote é extremamente útil para produção
-científica e apresentação de resultados utilizando R. Em síntese, o R
-Markdown permite a integração em um único documento de texto básico,
-código de análise, tabelas, gráficos e equações. E mais importante, esta
-integração pdoe ser convertida em diversos formatos: html, pdf, doc.
+Several of the materials I will use in the course were generated using
+**Rmarkdown**. The **R Markdown** is a packages that allows you to
+combine text (markdown) with code (R) and generate high quality
+documents in html, doc and pdf. You can read more
+[here](https://bookdown.org/yihui/rmarkdown/)
 
-Essa combinação parece simples, mas esta potencialidade é super útil.
-Por exemplo, este tutorial, assim como **o website do curso, e a
-ementa,** foram todos feitos usando Rmarkdown. Iremos desbravar juntos
-as potencialidades do Rmarkdown nas próximas aulas. Por enquanto, vamos
-somente instalar o pacote
+This combination between text and code sounds simple, but it is not. It
+is a complex and extremely useful capability. For example, this
+tutorial, as well as my slides, were all done using Rmarkdown. We will
+explore together the potential of Rmarkdown in the next classes. For
+now, let’s just install the package.
 
-Abra um script de R em seu laptop e rode o seguinte código.
+Open an R script on your laptop and run the following code.
 
 ``` r
 # Install from CRAN
 install.packages('rmarkdown')
 ```
 
-Para produzirmos documentos usando Rmarkdown em formato PDF, precisamos
-ter LaTeX instalado em nosso sistema operacional. Latex é uma linguagem
-de marcação de texto, isto é, uma sintaxe na qual você escreve textos já
-com as indicações de layout, como deve aparecer na página final. Ao
-invés de usar point-and-click do word, o LaTeX usa uma série de funções
-para produzir seus layouts, o que, por consequência, o torna mais
-flexível, e muito utilizado para produção de textos acadêmicos.
+### Rmarkdown to pdfs.
 
-Para usuários de R Markdown que não são usuários de LaTeX, sugere-se que
-você instale TinyTeX
+To produce documents using Rmarkdown in PDF format, we need to have
+LaTeX installed in our operating system. Latex is a text markup language
+– a syntax in which you write text with layout indications, as it should
+appear on the final page. In other words, you don’t immediately see the
+output of your writing. Instead of using word point-and-click, LaTeX
+uses a series of functions to produce its layouts, which, consequently,
+makes it more flexible, and very useful for academic text production.
+
+For R Markdown users who are not LaTeX users, it is suggested that you
+install TinyTeX
 (<a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>).
 
 ``` r
@@ -248,30 +265,29 @@ tinytex::install_tinytex()  # install TinyTeX
 Google Chrome
 -------------
 
-Você precisará ter um navegador da web moderno instalado para realizar
-algumas das tarefas desta aula. O navegador recomendado para esta aula é
-o [Google Chrome](https://www.google.co.uk/intl/en_uk/chrome/).
+You will need to have a modern web browser installed to perform some of
+the tasks in this lesson. The recommended browser for this class is
+[Google Chrome](https://www.google.co.uk/intl/en_uk/chrome/).
 
-Selector Gadget.
+Gadget Selector.
 ----------------
 
-Como parte do processo de raspagem de dados (semanas 7 e 8), você
-precisará examinar os elementos HTML em seus dados. Nesta aula, usaremos
-o Selector Gadget para essa finalidade. Esta ferramenta nos permite
-examinar facilmente os elementos por trás de cada página da web.
+As part of the data scraping classes, you will need to examine the HTML
+elements in your data. In this lesson, we’ll use the Selector Gadget for
+this purpose. This tool allows us to easily examine the elements behind
+each webpage.
 
-Se estiver usando o Google Chrome, você pode simplesmente instalar a
-[extensão Selector Gadget no
+If you are using Google Chrome, you can simply install the [Selector
+Gadget extension in
 Chrome](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en).
-Se por algum motivo você não puder usar as extensões do Chrome
-(incluindo no próprio Chrome), você pode instalar o Selector Gadget
-seguindo as instruções no site do Selector Gadget.
+If for some reason you can’t use Chrome extensions (including in Chrome
+itself), you can install Selector Gadget by following the instructions
+on the Selector Gadget website.
 
-Conclusão.
+Conclusion.
+-----------
+
+For today, we’re done.
+
+See you!!!
 ----------
-
-Por hoje, acabamos. Lembre-se que temos o nosso primeiro exercício. Vá
-no site e não esqueça de responder!
-
-Até!!
------
