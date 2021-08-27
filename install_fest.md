@@ -284,6 +284,109 @@ If for some reason you can’t use Chrome extensions (including in Chrome
 itself), you can install Selector Gadget by following the instructions
 on the Selector Gadget website.
 
+### APIs
+
+We will have a full day of the workshop dedicated to learning how to
+access APIs. In plain English, APIs are online addresses created by
+someone that wishes to to make it easy to send and share data.
+
+Some APIs require no authentication. However, others, for security
+reasons, require a registration (token and username) for access to the
+APIs to be released. The following sections show you a step by step for
+you to get your passwords on two APIS that I will use throughout the
+course.
+
+Twitter API
+===========
+
+The twitter API is definitily the one most heavily used by researhcers.
+First, let’s register on Twitter. For this you need to have a normal
+twitter account. Then you should go to the developer website
+<a href="https://developer.twitter.com/" class="uri">https://developer.twitter.com/</a>
+to create a special account. On this site, you click on the top corner
+where it says dashboard app
+
+<br>
+
+![](twitter1.jpeg)
+
+Then you click again to apply. And select the student option, as shown
+below.
+
+<br> ![](twitter2.jpeg)
+
+From this point on, twitter will ask you for information such as your
+phone number, address, and why you want the developer account. Be
+honest, what we’re doing is allowed by the twitter rules. Write that you
+are taking a course on data science and will use twitter with
+educational purposes. Every time twitter asks you to refer a website,
+put the address of our github page.
+
+One catch. Twitter accepts requests in English only. Don’t waste time
+trying to write very elaborate English. Be objective, and use google
+translator if you need help. After that, your order will go for review,
+and it may be authorized immediately, or twitter will ask you for more
+information. You should start this request as soon as possible.
+
+Once your developer account is approved, you can log in again and click
+the “Create a new app” button in the upper right corner of the screen.
+Our goal is not to create a full-featured app at this point, but simply
+to get the necessary credentials to start making some simple calls to
+the Twitter API. If all goes well, you will see the following image.
+Those are your credentials. don’t share with anyone. During the course,
+we will learn together how to use them.
+
+![](credentials_blurred.png)
+
+Crossfire API
+=============
+
+The Crossfire is a data laboratory, a collaborative digital platform
+that records the incidence of armed violence in the metropolitan regions
+of Rio de Janeiro and Recife. Instead of answering emails providing the
+data, they created an API to allow access to the data collected in the
+project. We are going to use their API, so we need to request a
+registration.
+
+Here you register and request the api password
+<a href="https://api.fogocruzado.org.br/register" class="uri">https://api.fogocruzado.org.br/register</a>.
+It’s as simple as creating an email. After registering, you will receive
+an email, and you will be able to login to the site. Once authenticated,
+this code below will return your api password.
+
+``` r
+# api fogo cruzado
+library(httr)
+library(jsonlite)
+library(tidyverse)
+```
+
+    ## ── Attaching packages ────────────────────────────────── tidyverse 1.3.0.9000 ──
+
+    ## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+    ## ✓ tibble  3.1.0     ✓ dplyr   1.0.5
+    ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+    ## ✓ readr   1.4.0     ✓ forcats 0.5.0
+
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## x dplyr::filter()  masks stats::filter()
+    ## x purrr::flatten() masks jsonlite::flatten()
+    ## x dplyr::lag()     masks stats::lag()
+
+``` r
+# Getting you access token.
+
+get_jwt <- httr::POST("https://api.fogocruzado.org.br/api/v1/auth/login",
+                 query = list(email = "your_email", password = "yourpassword"))
+
+token <- httr::content(get_jwt)$access_token
+
+
+# token = your password for the API
+```
+
+\`\`\`
+
 Conclusion.
 -----------
 
