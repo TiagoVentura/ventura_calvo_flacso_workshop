@@ -1,25 +1,3 @@
-## ----setup, include=FALSE---------------------------------------------------------------------------------------
-options(htmltools.dir.version = FALSE)
-knitr::opts_chunk$set(messagwese=FALSE, warning = FALSE)
-xaringanthemer::style_mono_accent(base_color ="#23395b", 
-                                  title_slide_text_color="#23395b", 
-                                  title_slide_background_color = "#fbf9f4", 
-                                  background_color = "#fbf9f4", 
-                                  link_color =  "#F21A00", 
-                                 code_font_size = "60%")
-
-options(htmltools.dir.version = FALSE)
-knitr::opts_chunk$set(message=FALSE, warning = FALSE, error=TRUE)
-
-
-
-## ----echo=FALSE, out.width = "100%"-----------------------------------------------------------------------------
-knitr::include_graphics("R_vs_RStudio_1.png") 
-
-
-## ----echo=FALSE, out.width = "100%"-----------------------------------------------------------------------------
-knitr::include_graphics("rstudio.png") 
-
 
 ## ---------------------------------------------------------------------------------------------------------------
 2+2
@@ -34,9 +12,9 @@ knitr::include_graphics("rstudio.png")
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
 ## # Rode estas operação em um script.
 ## # Hashtags permite você comentar seu código.
-## 2^2
-## 2*2
-## 2/2
+2^2
+2*2
+2/2
 
 
 ## ---------------------------------------------------------------------------------------------------------------
@@ -48,29 +26,26 @@ plot("hello")
 
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
-## install.packages("devtools", force=TRUE)
+install.packages("devtools", force=TRUE)
 
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
-## library(devtools)
+library(devtools)
 
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
-## devtools::install_github("electorArg/polAr")
+devtools::install_github("Cepesp-Fgv/cepesp-r")
 
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
 ## # Specific to a function
-## ?mean  # Help para a função mean.
-## help(mean)
+?mean  # Help para a função mean.
+help(mean)
 ## 
 ## # More General
-## ??mean
+??mean
 ## 
 
-
-## ----echo=FALSE, out.width = "70%"------------------------------------------------------------------------------
-knitr::include_graphics("ajuda.png") 
 
 
 ## ----echo=FALSE, out.width = "50%"------------------------------------------------------------------------------
@@ -95,8 +70,8 @@ nome <- "Tiago Ventura"
 
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
-## x<-6
-## mean(x=c(5, 7))
+x<-6
+mean(x=c(5, 7))
 
 
 ## ---------------------------------------------------------------------------------------------------------------
@@ -180,19 +155,19 @@ as.numeric("25")
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
 ## 
-## install.packages(tidyverse)
+install.packages(tidyverse)
 ## 
 
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
-## false <- "FALSE"
-## false <- as.logical(false)
-## class(false)
+ false <- "FALSE"
+false <- as.logical(false)
+ class(false)
 
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
 ## 
-## mean(x = sample(1:50, 5)) == mean(x) # TRUE ou FALSE
+mean(x = sample(1:50, 5)) == mean(x) # TRUE ou FALSE
 ## 
 
 
@@ -309,26 +284,26 @@ bakers[bakers$hometown=="London",]
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
 ## 
-## head(mtcars) # First lines
+head(mtcars) # First lines
 ## 
-## tail(mtcars) # last lines linhas
+tail(mtcars) # last lines linhas
 ## 
-## summary(mtcars) # classes
+summary(mtcars) # classes
 ## 
-## dim(mtcars) # dimensions
+dim(mtcars) # dimensions
 ## 
-## glimpse(mtcars) # summary
+glimpse(mtcars) # summary
 ## 
 
 
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
 ## # make a fake data set
 ## 
-## dfake <- data.frame(normal=rnorm(100, 0, 1),
-##                     uniform=runif(100, 0, 1),
-##                     pois=rpois(100, 10))
-## # write.function(data, name_to_be_saved)
-## write.csv(dfake, "dfake.csv")
+dfake <- data.frame(normal=rnorm(100, 0, 1),
+                     uniform=runif(100, 0, 1),
+                     pois=rpois(100, 10))
+# write.function(data, name_to_be_saved)
+ write.csv(dfake, "dfake.csv")
 
 
 ## ---------------------------------------------------------------------------------------------------------------
@@ -339,7 +314,7 @@ getwd()
 ## ----eval=FALSE-------------------------------------------------------------------------------------------------
 ## 
 ## # Where should R be looking instead?
-## setwd("/home/venturat/Downloads")
+setwd("/home/venturat/Downloads")
 
 
 ## ---------------------------------------------------------------------------------------------------------------
