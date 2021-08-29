@@ -30,7 +30,7 @@ During week one, we cover several topics I would put under a *Crash Course do Da
 
 The structure of the course is simple. The morning will be focused on lectures and coding example. We will embed some coding exercises during our morning lectures, however, most of the time we will focus on me going through some code and presentation with you. For the afternoons, you will have some practice questions, as well as the opportunity to work through the code we discussed during the morning lectures. 
 
-Our syllabus is available [here](). The presentation and code for each section goes below. 
+Our syllabus is available [here](https://www.dropbox.com/s/rohvst9at5bob3s/Calvo-Ventura-Flacso-Seminario%20Textos%20y%20Redes.docx?dl=0). The presentation and code for each section goes below. 
 
 ### Pre-Arrival.
 
@@ -42,7 +42,7 @@ The tutorial is [here](https://github.com/TiagoVentura/ventura_calvo_flacso_work
 
 - Introduction to Computational Social Science ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_1/intro_css_flacso))
 
-- Intro to R ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_1/intro_css_flacso/intro_r_flacso.Rmd), [Code](./day_1/intro_r_flacso.R))
+- Intro to R ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_1/intro_css_flacso/intro_r_flacso.Rmd), [Code](https://www.dropbox.com/s/it26ghjsr0nkbh7/intro_r_flacso.R?dl=0))
 
 **Exercises and Readings for the Lab**
 
