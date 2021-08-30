@@ -42,7 +42,7 @@ The tutorial is [here](https://github.com/TiagoVentura/ventura_calvo_flacso_work
 
 - Introduction to Computational Social Science ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_1/intro_css_flacso))
 
-- Intro to R ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_1/intro_r_flacso), [Code](https://www.dropbox.com/s/it26ghjsr0nkbh7/intro_r_flacso.R?dl=0))
+- Intro to R ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_1/intro_r_flacso), [Code](https://www.dropbox.com/s/9q9a45lxigu5qzc/intro_r_flacso.R?dl=0))
 
 **Exercises and Readings for the Lab**
 
