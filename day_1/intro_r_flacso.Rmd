@@ -168,13 +168,12 @@ plot("hello")
 .pull-left[
 
 #### What the Packages are?
-- A set of thematic function someone put together for you. 
 
+- A set of thematic functions that someone put together for you. 
 
 - Sometimes packages also bring data
 
-
-- In the end, just a folder you donwloaded to your computer. 
+- In the end, just a folder saved downloaded to your computer. 
 
 ]
 
@@ -286,7 +285,8 @@ Objects names can only contain letters, numbers, the underscore character, and (
 
 Assigning values to new objects is how you create things in R. 
 
-<br><br>
+---
+class:center, middle 
 
 ### `Everything that exists in R is an object.`
 
@@ -348,7 +348,9 @@ Object names must start with a letter, and can only contain letters, numbers, _ 
 
 You want your object names to be descriptive, so you’ll need a convention for multiple words. 
 
-Best Practice: snake_case where you separate lowercase words with _.
+Best Practice: 
+
+- **snake_case:** style of writing in which each space is replaced by an underscore (__) character, and the first letter of each word written in lowercase.
 
 ---
 class: center, middle 
@@ -383,7 +385,9 @@ nome <- "Tiago Augusto Ventura"
 
 ## Objects Classes
 
-Every object in R has a **class**. The class describes what the object is. Main classes are:
+Every object in R has a **class**. The class describes what the object is. 
+
+Main classes are:
 
 ```{r echo=FALSE}
 library(kableExtra)
@@ -477,7 +481,9 @@ To complement our discussion on objects in R, let's briefly see how boolean oper
         x==1 | y==5 # "or" conditional statements
 
 ```
-        
+
+Boolean operators will be important in the future for you on tasks of data manipulations, creating new variables, writing functions and loops. 
+
 ---
 
 # Challenge 1. 
