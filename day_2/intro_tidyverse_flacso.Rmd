@@ -141,7 +141,7 @@ Tibbles are exactly the same as `data.frames` in their basic structure. However,
 class (mtcars)
 
 # Convert to tibbles
-mtcars_tib <- as_tibble (mtcars)
+mtcars_tib <- as_tibble(mtcars)
 mtcars_tib
 ```
 ]
@@ -216,16 +216,16 @@ x%>%
 
 # Do not run this code.
 x%>%
-  function1 (arg1 = x)%>%
-  function2 (arg = output_da_funcao1)
+  function1(arg1 = x)%>%
+  function2(arg = output_da_funcao1)
 ```
 
 **Example:**
 
 ```{r out.width ="30%"}
-sample (1: 1000, 500, replace = TRUE)%>%
-  density ()%>% # function 1.
-  plot () # function 2.
+sample(1: 1000, 500, replace = TRUE)%>%
+  density()%>% # function 1.
+  plot() # function 2.
 ```
 
 ---
@@ -276,8 +276,6 @@ pres_rio <- get_votes(year = 2018,
 ---
 
 ## Introduction to Dplyr.
-
-`Dplyr` is one of the most popular packages in R.
 
 The idea behind the `dplyr` functions is  simple: its functions do exactly what their names describe (**verb based language**). These are the most useful functions: 
 
@@ -696,47 +694,8 @@ pres_rio %>%
 ```
 ]
 
-
-
 ---
 
-<!-- ### Practicing:  -->
-
-
-<!-- Abra o banco de dados de candidatos a deputado federal no Rio de Janeiro.  -->
-
-<!-- ```{r} -->
-<!-- dep_rio <- get_candidates(year=2018, -->
-<!--                           position="Federal Deputy") %>% -->
-<!--            as_tibble() -->
-<!-- ``` -->
-
-
-<!-- 1 - Qual partido elegeu mais deputados? (3 linhas) -->
-
-<!-- ```{r} -->
-<!-- # Dica: `data %>% filter(COD_SIT_TOT_TURNO==2 | COD_SIT_TOT_TURNO==3) =  filtra somente os eleitos.  -->
-
-<!-- ``` -->
-
-<!-- 2 - Qual candidato gastou mais recursos ? (2-3 linhas) -->
-
-
-<!-- 3 - Qual valor médio declarado de gastos de campanha de acordo com o gênero dos candidatos? (3 linhas) -->
-
-<!-- ```{r echo=FALSE} -->
-<!-- library(countdown) -->
-<!-- countdown(minutes = 15, seconds = 0, bottom = 0, -->
-<!--           right = 0, -->
-<!--           padding = "10px", -->
-<!--           margin = "5%", -->
-<!--           font_size = "3em") -->
-
-<!-- ``` -->
-
-
-
----
 
 ## Joins
 
@@ -745,7 +704,6 @@ Connecting our dataset with information from other sources is crucial in any app
 `dplyr` has a set of functions to merge dataframes. These functions are all inspired by another language called **SQL**.
 
 When connecting two datasets, we called **keys** the name of the variables used in the merging. These variables must always be unique (one per row) and complete (no missing). 
-
 
 ---
 

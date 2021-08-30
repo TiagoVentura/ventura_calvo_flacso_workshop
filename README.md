@@ -53,7 +53,7 @@ The tutorial is [here](https://github.com/TiagoVentura/ventura_calvo_flacso_work
 
 ### Day II: Tidyverse and Data Wrangling
 
-- Introduction to Tidyverse ([Presentation](), [Code]())
+- Introduction to Tidyverse ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_2/intro_tidyverse_flacso), [Code](https://www.dropbox.com/s/326wbugrkubzuwe/intro_tidyverse_flacso.R?dl=0))
 
 **Exercises and Readings for the Lab**
 

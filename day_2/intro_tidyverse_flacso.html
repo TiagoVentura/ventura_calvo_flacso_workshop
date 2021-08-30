@@ -138,7 +138,7 @@ class (mtcars)
 
 ```r
 # Convert to tibbles
-mtcars_tib &lt;- as_tibble (mtcars)
+mtcars_tib &lt;- as_tibble(mtcars)
 mtcars_tib
 ```
 
@@ -246,17 +246,17 @@ x%&gt;%
 ```r
 # Do not run this code.
 x%&gt;%
-  function1 (arg1 = x)%&gt;%
-  function2 (arg = output_da_funcao1)
+  function1(arg1 = x)%&gt;%
+  function2(arg = output_da_funcao1)
 ```
 
 **Example:**
 
 
 ```r
-sample (1: 1000, 500, replace = TRUE)%&gt;%
-  density ()%&gt;% # function 1.
-  plot () # function 2.
+sample(1: 1000, 500, replace = TRUE)%&gt;%
+  density()%&gt;% # function 1.
+  plot() # function 2.
 ```
 
 &lt;img src="intro_tidyverse_flacso_files/figure-html/unnamed-chunk-10-1.png" width="30%" /&gt;
@@ -317,8 +317,6 @@ pres_rio &lt;- get_votes(year = 2018,
 ---
 
 ## Introduction to Dplyr.
-
-`Dplyr` is one of the most popular packages in R.
 
 The idea behind the `dplyr` functions is  simple: its functions do exactly what their names describe (**verb based language**). These are the most useful functions: 
 
@@ -530,21 +528,23 @@ pres_rio %&gt;%
 
 ```
 ## # A tibble: 1,374 x 19
-##    UF    NOME_UF    ANO_ELEICAO SIGLA_UE NUM_TURNO DESCRICAO_ELEICAO  CODIGO_CARGO DESCRICAO_CARGO NUMERO_CANDIDATO
-##    &lt;chr&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;                     &lt;int&gt; &lt;chr&gt;                      &lt;int&gt;
-##  1 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    12
-##  2 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    13
-##  3 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    15
-##  4 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    16
-##  5 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    17
-##  6 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    18
-##  7 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    19
-##  8 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    27
-##  9 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    30
-## 10 RJ    Rio de Ja…        2018 BR               1 ELEIÇÃO GERAL FED…            1 PRESIDENTE                    45
-## # … with 1,364 more rows, and 10 more variables: CODIGO_MACRO &lt;int&gt;, NOME_MACRO &lt;chr&gt;, CODIGO_MESO &lt;int&gt;,
-## #   NOME_MESO &lt;chr&gt;, CODIGO_MICRO &lt;int&gt;, NOME_MICRO &lt;chr&gt;, COD_MUN_TSE &lt;int&gt;, COD_MUN_IBGE &lt;int&gt;,
-## #   NOME_MUNICIPIO &lt;chr&gt;, QTDE_VOTOS &lt;int&gt;
+##    UF    NOME_UF   ANO_ELEICAO SIGLA_UE NUM_TURNO DESCRICAO_ELEICAO CODIGO_CARGO
+##    &lt;chr&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;                    &lt;int&gt;
+##  1 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+##  2 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+##  3 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+##  4 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+##  5 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+##  6 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+##  7 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+##  8 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+##  9 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+## 10 RJ    Rio de J…        2018 BR               1 ELEIÇÃO GERAL FE…            1
+## # … with 1,364 more rows, and 12 more variables: DESCRICAO_CARGO &lt;chr&gt;,
+## #   NUMERO_CANDIDATO &lt;int&gt;, CODIGO_MACRO &lt;int&gt;, NOME_MACRO &lt;chr&gt;,
+## #   CODIGO_MESO &lt;int&gt;, NOME_MESO &lt;chr&gt;, CODIGO_MICRO &lt;int&gt;, NOME_MICRO &lt;chr&gt;,
+## #   COD_MUN_TSE &lt;int&gt;, COD_MUN_IBGE &lt;int&gt;, NOME_MUNICIPIO &lt;chr&gt;,
+## #   QTDE_VOTOS &lt;int&gt;
 ```
 
 ---
@@ -743,20 +743,22 @@ pres_rio %&gt;%
 
 ```
 ## # A tibble: 1,374 x 21
-##    NOME_UF  NOME_MUNICIPIO state_sigla ANO_ELEICAO SIGLA_UE NUM_TURNO DESCRICAO_ELEIC… CODIGO_CARGO DESCRICAO_CARGO
-##    &lt;chr&gt;    &lt;chr&gt;          &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt;          
-##  1 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-##  2 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-##  3 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-##  4 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-##  5 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-##  6 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-##  7 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-##  8 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-##  9 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-## 10 Rio de … Angra dos Reis RJ                 2018 BR               1 ELEIÇÃO GERAL F…            1 PRESIDENTE     
-## # … with 1,364 more rows, and 12 more variables: NUMERO_CANDIDATO &lt;int&gt;, CODIGO_MACRO &lt;int&gt;, NOME_MACRO &lt;chr&gt;,
-## #   UF &lt;chr&gt;, CODIGO_MESO &lt;int&gt;, NOME_MESO &lt;chr&gt;, CODIGO_MICRO &lt;int&gt;, NOME_MICRO &lt;chr&gt;, COD_MUN_TSE &lt;int&gt;,
+##    NOME_UF        NOME_MUNICIPIO state_sigla ANO_ELEICAO SIGLA_UE NUM_TURNO
+##    &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+##  1 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+##  2 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+##  3 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+##  4 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+##  5 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+##  6 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+##  7 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+##  8 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+##  9 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+## 10 Rio de Janeiro Angra dos Reis RJ                 2018 BR               1
+## # … with 1,364 more rows, and 15 more variables: DESCRICAO_ELEICAO &lt;chr&gt;,
+## #   CODIGO_CARGO &lt;int&gt;, DESCRICAO_CARGO &lt;chr&gt;, NUMERO_CANDIDATO &lt;int&gt;,
+## #   CODIGO_MACRO &lt;int&gt;, NOME_MACRO &lt;chr&gt;, UF &lt;chr&gt;, CODIGO_MESO &lt;int&gt;,
+## #   NOME_MESO &lt;chr&gt;, CODIGO_MICRO &lt;int&gt;, NOME_MICRO &lt;chr&gt;, COD_MUN_TSE &lt;int&gt;,
 ## #   COD_MUN_IBGE &lt;int&gt;, QTDE_VOTOS &lt;int&gt;, state_city &lt;chr&gt;
 ```
 
@@ -815,21 +817,23 @@ pres_rio %&gt;%
 ```
 ## # A tibble: 1,374 x 19
 ## # Groups:   NUMERO_CANDIDATO [13]
-##    ANO_ELEICAO SIGLA_UE NUM_TURNO DESCRICAO_ELEICAO      CODIGO_CARGO DESCRICAO_CARGO NUMERO_CANDIDATO CODIGO_MACRO
-##          &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;                         &lt;int&gt; &lt;chr&gt;                      &lt;int&gt;        &lt;int&gt;
-##  1        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    12            3
-##  2        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    13            3
-##  3        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    15            3
-##  4        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    16            3
-##  5        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    17            3
-##  6        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    18            3
-##  7        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    19            3
-##  8        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    27            3
-##  9        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    30            3
-## 10        2018 BR               1 ELEIÇÃO GERAL FEDERAL…            1 PRESIDENTE                    45            3
-## # … with 1,364 more rows, and 11 more variables: NOME_MACRO &lt;chr&gt;, UF &lt;chr&gt;, NOME_UF &lt;chr&gt;, CODIGO_MESO &lt;int&gt;,
-## #   NOME_MESO &lt;chr&gt;, CODIGO_MICRO &lt;int&gt;, NOME_MICRO &lt;chr&gt;, COD_MUN_TSE &lt;int&gt;, COD_MUN_IBGE &lt;int&gt;,
-## #   NOME_MUNICIPIO &lt;chr&gt;, QTDE_VOTOS &lt;int&gt;
+##    ANO_ELEICAO SIGLA_UE NUM_TURNO DESCRICAO_ELEICAO CODIGO_CARGO DESCRICAO_CARGO
+##          &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;          
+##  1        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+##  2        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+##  3        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+##  4        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+##  5        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+##  6        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+##  7        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+##  8        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+##  9        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+## 10        2018 BR               1 ELEIÇÃO GERAL FE…            1 PRESIDENTE     
+## # … with 1,364 more rows, and 13 more variables: NUMERO_CANDIDATO &lt;int&gt;,
+## #   CODIGO_MACRO &lt;int&gt;, NOME_MACRO &lt;chr&gt;, UF &lt;chr&gt;, NOME_UF &lt;chr&gt;,
+## #   CODIGO_MESO &lt;int&gt;, NOME_MESO &lt;chr&gt;, CODIGO_MICRO &lt;int&gt;, NOME_MICRO &lt;chr&gt;,
+## #   COD_MUN_TSE &lt;int&gt;, COD_MUN_IBGE &lt;int&gt;, NOME_MUNICIPIO &lt;chr&gt;,
+## #   QTDE_VOTOS &lt;int&gt;
 ```
 
 
@@ -1045,47 +1049,8 @@ pres_rio %&gt;%
 ```
 ]
 
-
-
 ---
 
-&lt;!-- ### Practicing:  --&gt;
-
-
-&lt;!-- Abra o banco de dados de candidatos a deputado federal no Rio de Janeiro.  --&gt;
-
-&lt;!-- ```{r} --&gt;
-&lt;!-- dep_rio &lt;- get_candidates(year=2018, --&gt;
-&lt;!--                           position="Federal Deputy") %&gt;% --&gt;
-&lt;!--            as_tibble() --&gt;
-&lt;!-- ``` --&gt;
-
-
-&lt;!-- 1 - Qual partido elegeu mais deputados? (3 linhas) --&gt;
-
-&lt;!-- ```{r} --&gt;
-&lt;!-- # Dica: `data %&gt;% filter(COD_SIT_TOT_TURNO==2 | COD_SIT_TOT_TURNO==3) =  filtra somente os eleitos.  --&gt;
-
-&lt;!-- ``` --&gt;
-
-&lt;!-- 2 - Qual candidato gastou mais recursos ? (2-3 linhas) --&gt;
-
-
-&lt;!-- 3 - Qual valor médio declarado de gastos de campanha de acordo com o gênero dos candidatos? (3 linhas) --&gt;
-
-&lt;!-- ```{r echo=FALSE} --&gt;
-&lt;!-- library(countdown) --&gt;
-&lt;!-- countdown(minutes = 15, seconds = 0, bottom = 0, --&gt;
-&lt;!--           right = 0, --&gt;
-&lt;!--           padding = "10px", --&gt;
-&lt;!--           margin = "5%", --&gt;
-&lt;!--           font_size = "3em") --&gt;
-
-&lt;!-- ``` --&gt;
-
-
-
----
 
 ## Joins
 
@@ -1094,7 +1059,6 @@ Connecting our dataset with information from other sources is crucial in any app
 `dplyr` has a set of functions to merge dataframes. These functions are all inspired by another language called **SQL**.
 
 When connecting two datasets, we called **keys** the name of the variables used in the merging. These variables must always be unique (one per row) and complete (no missing). 
-
 
 ---
 
@@ -1365,7 +1329,423 @@ class: middle, center, inverse
 
 class: middle, center, inverse
 
-### See you again Tomorrow!
+### Do we still have time?
+
+---
+
+# Scoped Vebs in dplyr
+
+---
+
+## What are they?
+
+`dplyr` on steroids.
+
+#### Main usages:
+
+- Allows the use of dplyr verbs on multiple variables all at once. 
+
+#### Examples:
+
+- `summarise_at`, `mutate_at`,`filter_at`,
+
+- `select_if`, `mutate_if`, `filter_if`.
+
+- `rename_all`, `mutate_all`, `summarise_all`.
+
+---
+## Brazilian Electoral Data.
+
+
+```r
+library(cepespR)
+library(tidyverse)
+d &lt;- get_votes(year = 2018, 
+                         position = "Federal Deputy", 
+                         regional_aggregation = "Municipio", 
+                         state="RJ") %&gt;%
+                  as_tibble()
+cand &lt;- get_candidates(year=2018,
+                       position="Federal Deputy") %&gt;%
+          as_tibble()
+```
+
+---
+## `function_if`: 
+
+###  Perform an operation on variables that satisfy a logical criteria
+
+#### Basics
+
+      function_if(logical_criteria, function implementing operations)
+      
+      
+---
+## select_if
+
+
+```r
+d %&gt;%
+  select_if(is.numeric)
+```
+
+```
+## # A tibble: 51,768 x 10
+##    ANO_ELEICAO NUM_TURNO CODIGO_CARGO NUMERO_CANDIDATO CODIGO_MACRO CODIGO_MESO
+##          &lt;int&gt;     &lt;int&gt;        &lt;int&gt;            &lt;int&gt;        &lt;int&gt;       &lt;int&gt;
+##  1        2018         1            6               10            3           5
+##  2        2018         1            6             1000            3           5
+##  3        2018         1            6             1001            3           5
+##  4        2018         1            6             1002            3           5
+##  5        2018         1            6             1003            3           5
+##  6        2018         1            6             1004            3           5
+##  7        2018         1            6             1005            3           5
+##  8        2018         1            6             1007            3           5
+##  9        2018         1            6             1009            3           5
+## 10        2018         1            6             1010            3           5
+## # … with 51,758 more rows, and 4 more variables: CODIGO_MICRO &lt;int&gt;,
+## #   COD_MUN_TSE &lt;int&gt;, COD_MUN_IBGE &lt;int&gt;, QTDE_VOTOS &lt;int&gt;
+```
+
+---
+## mutate_if
+
+Mutate columns that satisfy specified logical conditions.
+
+
+```r
+d %&gt;% 
+  mutate_if(is.character, str_to_title) 
+```
+
+```
+## # A tibble: 51,768 x 19
+##    ANO_ELEICAO SIGLA_UE NUM_TURNO DESCRICAO_ELEICAO CODIGO_CARGO DESCRICAO_CARGO
+##          &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;          
+##  1        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+##  2        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+##  3        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+##  4        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+##  5        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+##  6        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+##  7        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+##  8        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+##  9        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+## 10        2018 Rj               1 Eleições Gerais …            6 Deputado Feder…
+## # … with 51,758 more rows, and 13 more variables: NUMERO_CANDIDATO &lt;int&gt;,
+## #   CODIGO_MACRO &lt;int&gt;, NOME_MACRO &lt;chr&gt;, UF &lt;chr&gt;, NOME_UF &lt;chr&gt;,
+## #   CODIGO_MESO &lt;int&gt;, NOME_MESO &lt;chr&gt;, CODIGO_MICRO &lt;int&gt;, NOME_MICRO &lt;chr&gt;,
+## #   COD_MUN_TSE &lt;int&gt;, COD_MUN_IBGE &lt;int&gt;, NOME_MUNICIPIO &lt;chr&gt;,
+## #   QTDE_VOTOS &lt;int&gt;
+```
+
+---
+## mutate_if: with different names
+
+
+```r
+d %&gt;% 
+  # extra trick if you want to change the name of the variables. 
+  mutate_if(is.character, list(to_title= ~ str_to_title(.x))) 
+```
+
+```
+## # A tibble: 51,768 x 28
+##    ANO_ELEICAO SIGLA_UE NUM_TURNO DESCRICAO_ELEICAO CODIGO_CARGO DESCRICAO_CARGO
+##          &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;          
+##  1        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+##  2        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+##  3        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+##  4        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+##  5        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+##  6        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+##  7        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+##  8        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+##  9        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+## 10        2018 RJ               1 ELEIÇÕES GERAIS …            6 DEPUTADO FEDER…
+## # … with 51,758 more rows, and 22 more variables: NUMERO_CANDIDATO &lt;int&gt;,
+## #   CODIGO_MACRO &lt;int&gt;, NOME_MACRO &lt;chr&gt;, UF &lt;chr&gt;, NOME_UF &lt;chr&gt;,
+## #   CODIGO_MESO &lt;int&gt;, NOME_MESO &lt;chr&gt;, CODIGO_MICRO &lt;int&gt;, NOME_MICRO &lt;chr&gt;,
+## #   COD_MUN_TSE &lt;int&gt;, COD_MUN_IBGE &lt;int&gt;, NOME_MUNICIPIO &lt;chr&gt;,
+## #   QTDE_VOTOS &lt;int&gt;, SIGLA_UE_to_title &lt;chr&gt;,
+## #   DESCRICAO_ELEICAO_to_title &lt;chr&gt;, DESCRICAO_CARGO_to_title &lt;chr&gt;,
+## #   NOME_MACRO_to_title &lt;chr&gt;, UF_to_title &lt;chr&gt;, NOME_UF_to_title &lt;chr&gt;,
+## #   NOME_MESO_to_title &lt;chr&gt;, NOME_MICRO_to_title &lt;chr&gt;,
+## #   NOME_MUNICIPIO_to_title &lt;chr&gt;
+```
+
+---
+
+## summarise_if
+
+
+```r
+d %&gt;% 
+  summarise_if(is.numeric, max)
+```
+
+```
+## # A tibble: 1 x 10
+##   ANO_ELEICAO NUM_TURNO CODIGO_CARGO NUMERO_CANDIDATO CODIGO_MACRO CODIGO_MESO
+##         &lt;int&gt;     &lt;int&gt;        &lt;int&gt;            &lt;int&gt;        &lt;int&gt;       &lt;int&gt;
+## 1        2018         1            6             9099            3           6
+## # … with 4 more variables: CODIGO_MICRO &lt;int&gt;, COD_MUN_TSE &lt;int&gt;,
+## #   COD_MUN_IBGE &lt;int&gt;, QTDE_VOTOS &lt;int&gt;
+```
+
+---
+## `function_at`
+
+### perform an operation only on variables specified by name
+
+
+    verb_at(vars(variables), fun(CHANGES))
+    
+
+---
+
+## mutate_at
+
+
+```r
+cand %&gt;%
+ mutate_at(vars(contains("DESCRICAO")), 
+                 str_to_lower) %&gt;%
+  select(contains("DESCRICAO"))
+```
+
+```
+## # A tibble: 8,588 x 8
+##    DESCRICAO_ELEIC… DESCRICAO_UE DESCRICAO_CARGO DESCRICAO_OCUPA… DESCRICAO_SEXO
+##    &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;         
+##  1 eleições gerais… acre         deputado feder… vereador         masculino     
+##  2 eleições gerais… acre         deputado feder… empresário       masculino     
+##  3 eleições gerais… acre         deputado feder… empresário       masculino     
+##  4 eleições gerais… acre         deputado feder… empresário       masculino     
+##  5 eleições gerais… acre         deputado feder… outros           masculino     
+##  6 eleições gerais… acre         deputado feder… outros           feminino      
+##  7 eleições gerais… acre         deputado feder… servidor públic… masculino     
+##  8 eleições gerais… acre         deputado feder… professor de en… masculino     
+##  9 eleições gerais… acre         deputado feder… servidor públic… masculino     
+## 10 eleições gerais… acre         deputado feder… policial militar masculino     
+## # … with 8,578 more rows, and 3 more variables: DESCRICAO_GRAU_INSTRUCAO &lt;chr&gt;,
+## #   DESCRICAO_ESTADO_CIVIL &lt;chr&gt;, DESCRICAO_NACIONALIDADE &lt;chr&gt;
+```
+
+---
+
+## Rename_at
+
+
+```r
+cand %&gt;%
+  rename_at(vars(ends_with("CARGO")), 
+            ~ str_replace(.x, "CARGO", "Cargo")) %&gt;%
+  select(contains("Cargo"))
+```
+
+```
+## # A tibble: 8,588 x 2
+##    CODIGO_Cargo DESCRICAO_Cargo 
+##           &lt;int&gt; &lt;chr&gt;           
+##  1            6 DEPUTADO FEDERAL
+##  2            6 DEPUTADO FEDERAL
+##  3            6 DEPUTADO FEDERAL
+##  4            6 DEPUTADO FEDERAL
+##  5            6 DEPUTADO FEDERAL
+##  6            6 DEPUTADO FEDERAL
+##  7            6 DEPUTADO FEDERAL
+##  8            6 DEPUTADO FEDERAL
+##  9            6 DEPUTADO FEDERAL
+## 10            6 DEPUTADO FEDERAL
+## # … with 8,578 more rows
+```
+
+---
+
+## OK.. WAIT...Tiago... what is this `~`?
+
+The tilde-dot is a shortcutfor anonymous functions. This shortcut basically allows you to work with arguments of functions inside of the map. We will see more of it tomorrow. 
+
+But let go through an example
+
+---
+
+## Example
+
+.pull-left[
+
+```r
+cand %&gt;%
+  rename_at(vars(ends_with("CARGO")), 
+            ~ str_replace(.x, "CARGO", "Cargo")) %&gt;%
+  select(contains("Cargo"))
+```
+
+```
+## # A tibble: 8,588 x 2
+##    CODIGO_Cargo DESCRICAO_Cargo 
+##           &lt;int&gt; &lt;chr&gt;           
+##  1            6 DEPUTADO FEDERAL
+##  2            6 DEPUTADO FEDERAL
+##  3            6 DEPUTADO FEDERAL
+##  4            6 DEPUTADO FEDERAL
+##  5            6 DEPUTADO FEDERAL
+##  6            6 DEPUTADO FEDERAL
+##  7            6 DEPUTADO FEDERAL
+##  8            6 DEPUTADO FEDERAL
+##  9            6 DEPUTADO FEDERAL
+## 10            6 DEPUTADO FEDERAL
+## # … with 8,578 more rows
+```
+]
+
+.pull-right[
+
+
+```r
+cand %&gt;%
+  rename_at(vars(ends_with("CARGO")), 
+            function(x) str_replace(x, "CARGO", "Cargo")) %&gt;%
+  select(contains("Cargo"))
+```
+
+```
+## # A tibble: 8,588 x 2
+##    CODIGO_Cargo DESCRICAO_Cargo 
+##           &lt;int&gt; &lt;chr&gt;           
+##  1            6 DEPUTADO FEDERAL
+##  2            6 DEPUTADO FEDERAL
+##  3            6 DEPUTADO FEDERAL
+##  4            6 DEPUTADO FEDERAL
+##  5            6 DEPUTADO FEDERAL
+##  6            6 DEPUTADO FEDERAL
+##  7            6 DEPUTADO FEDERAL
+##  8            6 DEPUTADO FEDERAL
+##  9            6 DEPUTADO FEDERAL
+## 10            6 DEPUTADO FEDERAL
+## # … with 8,578 more rows
+```
+
+]
+
+---
+
+## `function_all`
+
+### Perform alteration on all the variables.
+
+      function_all(var=all_by_default, função)
+      
+
+---
+
+### Mutate_all
+
+
+```r
+cand %&gt;%
+  mutate_all(str_trim)   
+```
+
+```
+## # A tibble: 8,588 x 42
+##    DATA_GERACAO HORA_GERACAO ANO_ELEICAO NUM_TURNO DESCRICAO_ELEICAO    SIGLA_UF
+##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;                &lt;chr&gt;   
+##  1 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+##  2 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+##  3 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+##  4 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+##  5 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+##  6 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+##  7 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+##  8 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+##  9 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+## 10 30/10/2018   10:39:17     2018        1         Eleições Gerais Est… AC      
+## # … with 8,578 more rows, and 36 more variables: SIGLA_UE &lt;chr&gt;,
+## #   DESCRICAO_UE &lt;chr&gt;, CODIGO_CARGO &lt;chr&gt;, DESCRICAO_CARGO &lt;chr&gt;,
+## #   NOME_CANDIDATO &lt;chr&gt;, NUMERO_CANDIDATO &lt;chr&gt;, CPF_CANDIDATO &lt;chr&gt;,
+## #   NOME_URNA_CANDIDATO &lt;chr&gt;, COD_SITUACAO_CANDIDATURA &lt;chr&gt;,
+## #   DES_SITUACAO_CANDIDATURA &lt;chr&gt;, NUMERO_PARTIDO &lt;chr&gt;, SIGLA_PARTIDO &lt;chr&gt;,
+## #   NOME_PARTIDO &lt;chr&gt;, CODIGO_LEGENDA &lt;chr&gt;, SIGLA_LEGENDA &lt;chr&gt;,
+## #   COMPOSICAO_LEGENDA &lt;chr&gt;, NOME_COLIGACAO &lt;chr&gt;, CODIGO_OCUPACAO &lt;chr&gt;,
+## #   DESCRICAO_OCUPACAO &lt;chr&gt;, DATA_NASCIMENTO &lt;chr&gt;,
+## #   NUM_TITULO_ELEITORAL_CANDIDATO &lt;chr&gt;, IDADE_DATA_ELEICAO &lt;chr&gt;,
+## #   CODIGO_SEXO &lt;chr&gt;, DESCRICAO_SEXO &lt;chr&gt;, COD_GRAU_INSTRUCAO &lt;chr&gt;,
+## #   DESCRICAO_GRAU_INSTRUCAO &lt;chr&gt;, CODIGO_ESTADO_CIVIL &lt;chr&gt;,
+## #   DESCRICAO_ESTADO_CIVIL &lt;chr&gt;, CODIGO_NACIONALIDADE &lt;chr&gt;,
+## #   DESCRICAO_NACIONALIDADE &lt;chr&gt;, SIGLA_UF_NASCIMENTO &lt;chr&gt;,
+## #   CODIGO_MUNICIPIO_NASCIMENTO &lt;chr&gt;, NOME_MUNICIPIO_NASCIMENTO &lt;chr&gt;,
+## #   DESPESA_MAX_CAMPANHA &lt;chr&gt;, COD_SIT_TOT_TURNO &lt;chr&gt;,
+## #   DESC_SIT_TOT_TURNO &lt;chr&gt;
+```
+
+---
+
+### Summarize_all
+
+An more meaningful example with mtcars.
+
+
+```r
+mtcars %&gt;%
+  summarise_all(mean)
+```
+
+```
+##        mpg    cyl     disp       hp     drat      wt     qsec     vs      am
+## 1 20.09062 6.1875 230.7219 146.6875 3.596563 3.21725 17.84875 0.4375 0.40625
+##     gear   carb
+## 1 3.6875 2.8125
+```
+
+---
+## Rename_all: with our `~`
+
+
+```r
+cand %&gt;%
+  rename_all(~ str_replace_all(.x, "_", "x"))
+```
+
+```
+## # A tibble: 8,588 x 42
+##    DATAxGERACAO HORAxGERACAO ANOxELEICAO NUMxTURNO DESCRICAOxELEICAO    SIGLAxUF
+##    &lt;chr&gt;        &lt;chr&gt;              &lt;int&gt;     &lt;int&gt; &lt;chr&gt;                &lt;chr&gt;   
+##  1 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+##  2 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+##  3 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+##  4 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+##  5 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+##  6 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+##  7 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+##  8 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+##  9 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+## 10 30/10/2018   10:39:17            2018         1 Eleições Gerais Est… AC      
+## # … with 8,578 more rows, and 36 more variables: SIGLAxUE &lt;chr&gt;,
+## #   DESCRICAOxUE &lt;chr&gt;, CODIGOxCARGO &lt;int&gt;, DESCRICAOxCARGO &lt;chr&gt;,
+## #   NOMExCANDIDATO &lt;chr&gt;, NUMEROxCANDIDATO &lt;int&gt;, CPFxCANDIDATO &lt;chr&gt;,
+## #   NOMExURNAxCANDIDATO &lt;chr&gt;, CODxSITUACAOxCANDIDATURA &lt;int&gt;,
+## #   DESxSITUACAOxCANDIDATURA &lt;chr&gt;, NUMEROxPARTIDO &lt;int&gt;, SIGLAxPARTIDO &lt;chr&gt;,
+## #   NOMExPARTIDO &lt;chr&gt;, CODIGOxLEGENDA &lt;int64&gt;, SIGLAxLEGENDA &lt;chr&gt;,
+## #   COMPOSICAOxLEGENDA &lt;chr&gt;, NOMExCOLIGACAO &lt;chr&gt;, CODIGOxOCUPACAO &lt;int&gt;,
+## #   DESCRICAOxOCUPACAO &lt;chr&gt;, DATAxNASCIMENTO &lt;chr&gt;,
+## #   NUMxTITULOxELEITORALxCANDIDATO &lt;chr&gt;, IDADExDATAxELEICAO &lt;int&gt;,
+## #   CODIGOxSEXO &lt;int&gt;, DESCRICAOxSEXO &lt;chr&gt;, CODxGRAUxINSTRUCAO &lt;int&gt;,
+## #   DESCRICAOxGRAUxINSTRUCAO &lt;chr&gt;, CODIGOxESTADOxCIVIL &lt;int&gt;,
+## #   DESCRICAOxESTADOxCIVIL &lt;chr&gt;, CODIGOxNACIONALIDADE &lt;int&gt;,
+## #   DESCRICAOxNACIONALIDADE &lt;chr&gt;, SIGLAxUFxNASCIMENTO &lt;chr&gt;,
+## #   CODIGOxMUNICIPIOxNASCIMENTO &lt;int&gt;, NOMExMUNICIPIOxNASCIMENTO &lt;chr&gt;,
+## #   DESPESAxMAXxCAMPANHA &lt;int&gt;, CODxSITxTOTxTURNO &lt;int&gt;,
+## #   DESCxSITxTOTxTURNO &lt;chr&gt;
+```
+
+---
+class: inverse, middle, center. 
+
+### that`s is enough for today. 
+
+#### See you tomorrow
 
 
     </textarea>
