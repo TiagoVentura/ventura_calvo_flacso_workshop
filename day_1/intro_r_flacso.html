@@ -367,9 +367,7 @@ ls()
 ```
 
 ```
-##  [1] "bakers"              "c"                   "char_1_5"            "dados"               "data"               
-##  [6] "lista_1"             "m"                   "meu_numero_da_sorte" "nome"                "num_1_5"            
-## [11] "x"                   "X"                   "x_list"              "x_matrix"            "y"
+## [1] "nome" "x"    "y"
 ```
 
 #### Remove Objects
@@ -650,7 +648,7 @@ length(X)
 
 ## Matrix
 
-**Main Feature:** Rectangular and Numeric.
+**Main Feature:** Rectangular and Same type.
 
 
 ```r
@@ -831,9 +829,10 @@ ls()
 ```
 
 ```
-##  [1] "bakers"              "c"                   "char_1_5"            "dados"               "data"               
-##  [6] "lista_1"             "m"                   "meu_numero_da_sorte" "nome"                "num_1_5"            
-## [11] "x"                   "X"                   "x_list"              "x_matrix"
+##  [1] "char_1_5"            "data"                "lista_1"            
+##  [4] "m"                   "meu_numero_da_sorte" "nome"               
+##  [7] "num_1_5"             "x"                   "X"                  
+## [10] "x_list"              "x_matrix"
 ```
 
 ```r
@@ -843,9 +842,10 @@ ls()
 ```
 
 ```
-##  [1] "bakers"              "c"                   "char_1_5"            "dados"               "data"               
-##  [6] "lista_1"             "m"                   "meu_numero_da_sorte" "nome"                "num_1_5"            
-## [11] "x"                   "X"                   "x_list"              "x_matrix"
+##  [1] "bakers"              "char_1_5"            "data"               
+##  [4] "lista_1"             "m"                   "meu_numero_da_sorte"
+##  [7] "nome"                "num_1_5"             "x"                  
+## [10] "X"                   "x_list"              "x_matrix"
 ```
 
 ```r
@@ -893,12 +893,24 @@ str(bakers)
 
 
 ```r
-mtcars[,1] # primeira coluna
+bakers[,1] # primeira coluna
 ```
 
 ```
-##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5
-## [23] 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7 15.0 21.4
+## # A tibble: 120 x 1
+##    series
+##    &lt;fct&gt; 
+##  1 1     
+##  2 1     
+##  3 1     
+##  4 1     
+##  5 1     
+##  6 1     
+##  7 1     
+##  8 1     
+##  9 1     
+## 10 1     
+## # … with 110 more rows
 ```
 
 ---
@@ -907,23 +919,153 @@ mtcars[,1] # primeira coluna
 
 
 ```r
-mtcars$mpg
+bakers$hometown
 ```
 
 ```
-##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5
-## [23] 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7 15.0 21.4
+##   [1] "Essex"                                    
+##   [2] "Milton Keynes"                            
+##   [3] "Bradford"                                 
+##   [4] "Birmingham"                               
+##   [5] "St Albans"                                
+##   [6] "Midlothian, Scotland"                     
+##   [7] "Manchester"                               
+##   [8] "South Wales"                              
+##   [9] "Midhurst, West Sussex"                    
+##  [10] "Poynton, Cheshire"                        
+##  [11] "Northampton"                              
+##  [12] "Leicester"                                
+##  [13] "Dunstable, Bedfordshire"                  
+##  [14] "Formby, Liverpool"                        
+##  [15] "Croydon"                                  
+##  [16] "Ongar, Essex"                             
+##  [17] "Arlesey, Bedfordshire"                    
+##  [18] "Kidderminster, Worcestershire"            
+##  [19] "London"                                   
+##  [20] "Norfolk"                                  
+##  [21] "Enfield, London"                          
+##  [22] "West Kirby, The Wirral"                   
+##  [23] "Sutton Coldfield"                         
+##  [24] "Pease Pottage, West Sussex"               
+##  [25] "Sheffield"                                
+##  [26] "Hillswick, Shetland Islands"              
+##  [27] "Wigan"                                    
+##  [28] "Leicester"                                
+##  [29] "Tamworth, Staffordshire"                  
+##  [30] "Windsor, Berkshire"                       
+##  [31] "Bristol"                                  
+##  [32] "Bewbush, West Sussex"                     
+##  [33] "Lichfield, Staffordshire"                 
+##  [34] "Somerset"                                 
+##  [35] "Saltley, Birmingham"                      
+##  [36] "Aldershot, Hampshire"                     
+##  [37] "Didcot, Oxfordshire"                      
+##  [38] "Peterborough"                             
+##  [39] "Market Harborough, Leicestershire"        
+##  [40] "Teignmouth, Devon"                        
+##  [41] "Sheffield"                                
+##  [42] "London"                                   
+##  [43] "Grimsby, Lincolnshire"                    
+##  [44] "Milton Keynes"                            
+##  [45] "Melbourn, Cambridgeshire"                 
+##  [46] "Southend, Essex"                          
+##  [47] "Reading, Berkshire"                       
+##  [48] "Broadstairs, Kent"                        
+##  [49] "Ashton upon Mersey, Trafford"             
+##  [50] "Alkington, Shropshire"                    
+##  [51] "Portsmouth, Hampshire"                    
+##  [52] "London/Belfast"                           
+##  [53] "Sneinton, Nottingham"                     
+##  [54] "Brighton, East Sussex"                    
+##  [55] "Poynton, Cheshire"                        
+##  [56] "Ascot, Berkshire"                         
+##  [57] "Barton-upon-Humber, Lincolnshire"         
+##  [58] "Portknockie, Moray"                       
+##  [59] "Mill Hill, London"                        
+##  [60] "Bracknell, Berkshire"                     
+##  [61] "Penwortham, Lancashire"                   
+##  [62] "Dunkeld, Perth and Kinross"               
+##  [63] "Great Wilbraham, Cambridgeshire"          
+##  [64] "Auchterarder, Perthshire"                 
+##  [65] "London"                                   
+##  [66] "Leeds / Luton"                            
+##  [67] "Swansea, Wales"                           
+##  [68] "Yeadon, West Yorkshire"                   
+##  [69] "Guildford, Surrey"                        
+##  [70] "Manchester"                               
+##  [71] "Woodford, London / Vilkaviškis, Lithuania"
+##  [72] "Derby / Holywood, County Down"            
+##  [73] "South London"                             
+##  [74] "Barton-Le-Clay, Bedfordshire"             
+##  [75] "Beckenham"                                
+##  [76] "Brooke, Norfolk"                          
+##  [77] "Bolton"                                   
+##  [78] "Cardiff"                                  
+##  [79] "Durham"                                   
+##  [80] "Erith"                                    
+##  [81] "London"                                   
+##  [82] "Rochdale"                                 
+##  [83] "Yeovil"                                   
+##  [84] "Bristol"                                  
+##  [85] "Merseyside"                               
+##  [86] "Brentwood, Essex"                         
+##  [87] "Crawley, West Sussex"                     
+##  [88] "Merseyside"                               
+##  [89] "North London"                             
+##  [90] "Southend, Essex"                          
+##  [91] "West Molesey, Surrey"                     
+##  [92] "Radlett, Hertfordshire"                   
+##  [93] "Watford, Hertfordshire"                   
+##  [94] "Edinburgh"                                
+##  [95] "North London"                             
+##  [96] "London"                                   
+##  [97] "Bristol"                                  
+##  [98] "London"                                   
+##  [99] "County Tyrone"                            
+## [100] "Newport"                                  
+## [101] "Wakefield"                                
+## [102] "Leeds"                                    
+## [103] "Sheffield"                                
+## [104] "London"                                   
+## [105] "Rotherham"                                
+## [106] "London"                                   
+## [107] "West Midlands"                            
+## [108] "Essex"                                    
+## [109] "Halifax"                                  
+## [110] "Rotherham"                                
+## [111] "Whitby"                                   
+## [112] "Leeds"                                    
+## [113] "Durham"                                   
+## [114] "Surrey"                                   
+## [115] "Stratford-upon-Avon"                      
+## [116] "Tenby, Wales"                             
+## [117] "Rainham"                                  
+## [118] "Leicester"                                
+## [119] "Somerset"                                 
+## [120] "Chester"
 ```
 
 ```r
 # Ou
 
-bakers[,"mpg"]
+bakers[,"hometown"]
 ```
 
 ```
-## Error: Can't subset columns that don't exist.
-## x Column `mpg` doesn't exist.
+## # A tibble: 120 x 1
+##    hometown             
+##    &lt;chr&gt;                
+##  1 Essex                
+##  2 Milton Keynes        
+##  3 Bradford             
+##  4 Birmingham           
+##  5 St Albans            
+##  6 Midlothian, Scotland 
+##  7 Manchester           
+##  8 South Wales          
+##  9 Midhurst, West Sussex
+## 10 Poynton, Cheshire    
+## # … with 110 more rows
 ```
 
 ---
@@ -937,13 +1079,13 @@ bakers[1:5, ]
 
 ```
 ## # A tibble: 5 x 8
-##   series baker_full             baker       age occupation                     hometown     baker_last baker_first
-##   &lt;fct&gt;  &lt;chr&gt;                  &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;                          &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;      
-## 1 1      "Annetha Mills"        Annetha      30 Midwife                        Essex        Mills      Annetha    
-## 2 1      "David Chambers"       David        31 Entrepreneur                   Milton Keyn… Chambers   David      
-## 3 1      "Edward \"Edd\" Kimbe… Edd          24 Debt collector for Yorkshire … Bradford     Kimber     Edward     
-## 4 1      "Jasminder Randhawa"   Jasminder    45 Assistant Credit Control Mana… Birmingham   Randhawa   Jasminder  
-## 5 1      "Jonathan Shepherd"    Jonathan     25 Research Analyst               St Albans    Shepherd   Jonathan
+##   series baker_full   baker    age occupation    hometown baker_last baker_first
+##   &lt;fct&gt;  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;      
+## 1 1      "Annetha Mi… Annet…    30 Midwife       Essex    Mills      Annetha    
+## 2 1      "David Cham… David     31 Entrepreneur  Milton … Chambers   David      
+## 3 1      "Edward \"E… Edd       24 Debt collect… Bradford Kimber     Edward     
+## 4 1      "Jasminder … Jasmi…    45 Assistant Cr… Birming… Randhawa   Jasminder  
+## 5 1      "Jonathan S… Jonat…    25 Research Ana… St Alba… Shepherd   Jonathan
 ```
 
 
@@ -959,18 +1101,18 @@ bakers[bakers$age&gt;60,]
 
 ```
 ## # A tibble: 10 x 8
-##    series baker_full           baker      age occupation                hometown            baker_last baker_first
-##    &lt;fct&gt;  &lt;chr&gt;                &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;               &lt;chr&gt;      &lt;chr&gt;      
-##  1 2      "Janet Basu"         Janet       63 Teacher of Modern Langua… Formby, Liverpool   Basu       Janet      
-##  2 3      "Brendan Lynch"      Brendan     63 Recruitment consultant    Sutton Coldfield    Lynch      Brendan    
-##  3 4      "Christine Wallace"  Christi…    66 Director of an engraving… Didcot, Oxfordshire Wallace    Christine  
-##  4 5      "Diana Beard"        Diana       69 Women's Institute (WI) J… Alkington, Shropsh… Beard      Diana      
-##  5 5      "Norman Calder"      Norman      66 Retired Naval Officer     Portknockie, Moray  Calder     Norman     
-##  6 6      "Marie Campbell"     Marie       66 Retired                   Auchterarder, Pert… Campbell   Marie      
-##  7 7      "Jane Beedle"        Jane        61 Garden designer           Beckenham           Beedle     Jane       
-##  8 7      "Lee Banfield"       Lee         67 Pastor                    Bolton              Banfield   Lee        
-##  9 7      "Valerie \"Val\" St… Val         66 Semi-retired, Substitute… Yeovil              Stones     Valerie    
-## 10 8      "Flo Atkins"         Flo         71 Retired                   Merseyside          Atkins     Flo
+##    series baker_full   baker    age occupation  hometown  baker_last baker_first
+##    &lt;fct&gt;  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;      
+##  1 2      "Janet Basu" Janet     63 Teacher of… Formby, … Basu       Janet      
+##  2 3      "Brendan Ly… Brend…    63 Recruitmen… Sutton C… Lynch      Brendan    
+##  3 4      "Christine … Chris…    66 Director o… Didcot, … Wallace    Christine  
+##  4 5      "Diana Bear… Diana     69 Women's In… Alkingto… Beard      Diana      
+##  5 5      "Norman Cal… Norman    66 Retired Na… Portknoc… Calder     Norman     
+##  6 6      "Marie Camp… Marie     66 Retired     Auchtera… Campbell   Marie      
+##  7 7      "Jane Beedl… Jane      61 Garden des… Beckenham Beedle     Jane       
+##  8 7      "Lee Banfie… Lee       67 Pastor      Bolton    Banfield   Lee        
+##  9 7      "Valerie \"… Val       66 Semi-retir… Yeovil    Stones     Valerie    
+## 10 8      "Flo Atkins" Flo       71 Retired     Merseysi… Atkins     Flo
 ```
 
 ```r
@@ -980,16 +1122,16 @@ bakers[bakers$hometown=="London",]
 
 ```
 ## # A tibble: 8 x 8
-##   series baker_full          baker       age occupation               hometown baker_last      baker_first
-##   &lt;fct&gt;  &lt;chr&gt;               &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;                    &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;      
-## 1 2      Robert Billington   Robert       25 Photographer             London   Billington      Robert     
-## 2 4      Kimberley Wilson    Kimberley    30 Psychologist             London   Wilson          Kimberley  
-## 3 6      Mat Riley           Mat          37 Fire fighter             London   Riley           Mat        
-## 4 7      Selasi Gbormittah   Selasi       30 Client service associate London   Gbormittah      Selasi     
-## 5 9      Antony Amourdoux    Antony       30 Banker                   London   Amourdoux       Antony     
-## 6 9      Dan Beasley-Harling Dan          36 Full-time parent         London   Beasley-Harling Dan        
-## 7 9      Manon Lagrève       Manon        26 Software project manager London   Lagrève         Manon      
-## 8 9      Ruby Bhogal         Ruby         29 Project manager          London   Bhogal          Ruby
+##   series baker_full   baker    age occupation    hometown baker_last baker_first
+##   &lt;fct&gt;  &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;      
+## 1 2      Robert Bill… Robert    25 Photographer  London   Billington Robert     
+## 2 4      Kimberley W… Kimbe…    30 Psychologist  London   Wilson     Kimberley  
+## 3 6      Mat Riley    Mat       37 Fire fighter  London   Riley      Mat        
+## 4 7      Selasi Gbor… Selasi    30 Client servi… London   Gbormittah Selasi     
+## 5 9      Antony Amou… Antony    30 Banker        London   Amourdoux  Antony     
+## 6 9      Dan Beasley… Dan       36 Full-time pa… London   Beasley-H… Dan        
+## 7 9      Manon Lagrè… Manon     26 Software pro… London   Lagrève    Manon      
+## 8 9      Ruby Bhogal  Ruby      29 Project mana… London   Bhogal     Ruby
 ```
 
 ---
@@ -999,15 +1141,15 @@ bakers[bakers$hometown=="London",]
 
 
 ```r
-head(mtcars) # First lines
+head(bakers) # First lines
 
-tail(mtcars) # last lines linhas
+tail(bakers) # last lines linhas
 
-summary(mtcars) # classes
+summary(bakers) # classes
 
-dim(mtcars) # dimensions
+dim(bakers) # dimensions
 
-glimpse(mtcars) # summary
+glimpse(bakers) # summary
 ```
 
 
@@ -1103,15 +1245,18 @@ list.files()
 ```
 
 ```
-##  [1] "ajuda.png"              "auth_bolsonaro.png"     "bail_design.jpg"        "bail.png"              
-##  [5] "Bolsonarobasicmap.png"  "camara.png"             "data_store.png"         "data.jpeg"             
-##  [9] "dfake.csv"              "eleicoes.png"           "F1.large.jpg"           "intro_css_flacso_cache"
-## [13] "intro_css_flacso.html"  "intro_css_flacso.Rmd"   "intro_r_flacso_files"   "intro_r_flacso.html"   
-## [17] "intro_r_flacso.R"       "intro_r_flacso.Rmd"     "libs"                   "mob_01.png"            
-## [21] "news_.png"              "parameters_ideo.png"    "portunol"               "portunol.png"          
-## [25] "R_vs_RStudio_1.png"     "redes_sociais.png"      "redes.png"              "rstudio.png"           
-## [29] "scott.gif"              "survey.png"             "toystore.jpg"           "tweets.png"            
-## [33] "twitter-api.jpg"        "waiting.gif"            "xaringan-themer.css"
+##  [1] "ajuda.png"              "auth_bolsonaro.png"     "bail_design.jpg"       
+##  [4] "bail.png"               "Bolsonarobasicmap.png"  "camara.png"            
+##  [7] "data_store.png"         "data.jpeg"              "dfake.csv"             
+## [10] "eleicoes.png"           "F1.large.jpg"           "intro_css_flacso_cache"
+## [13] "intro_css_flacso.html"  "intro_css_flacso.Rmd"   "intro_r_flacso_files"  
+## [16] "intro_r_flacso.html"    "intro_r_flacso.R"       "intro_r_flacso.Rmd"    
+## [19] "libs"                   "mob_01.png"             "news_.png"             
+## [22] "parameters_ideo.png"    "portunol"               "portunol.png"          
+## [25] "R_vs_RStudio_1.png"     "redes_sociais.png"      "redes.png"             
+## [28] "rstudio.png"            "scott.gif"              "survey.png"            
+## [31] "toystore.jpg"           "tweets.png"             "twitter-api.jpg"       
+## [34] "waiting.gif"            "xaringan-themer.css"
 ```
 
 ```r
@@ -1145,20 +1290,27 @@ summary(mtcars)
 ```
 
 ```
-##       mpg             cyl             disp             hp             drat             wt             qsec      
-##  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0   Min.   :2.760   Min.   :1.513   Min.   :14.50  
-##  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5   1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89  
-##  Median :19.20   Median :6.000   Median :196.3   Median :123.0   Median :3.695   Median :3.325   Median :17.71  
-##  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7   Mean   :3.597   Mean   :3.217   Mean   :17.85  
-##  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0   3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90  
-##  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0   Max.   :4.930   Max.   :5.424   Max.   :22.90  
-##        vs               am              gear            carb      
-##  Min.   :0.0000   Min.   :0.0000   Min.   :3.000   Min.   :1.000  
-##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
-##  Median :0.0000   Median :0.0000   Median :4.000   Median :2.000  
-##  Mean   :0.4375   Mean   :0.4062   Mean   :3.688   Mean   :2.812  
-##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
-##  Max.   :1.0000   Max.   :1.0000   Max.   :5.000   Max.   :8.000
+##       mpg             cyl             disp             hp       
+##  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+##  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+##  Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+##  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+##  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+##  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+##       drat             wt             qsec             vs        
+##  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+##  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+##  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+##  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+##  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+##  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+##        am              gear            carb      
+##  Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+##  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+##  Median :0.0000   Median :4.000   Median :2.000  
+##  Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+##  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+##  Max.   :1.0000   Max.   :5.000   Max.   :8.000
 ```
 
 ---

@@ -544,7 +544,7 @@ length(X)
 
 ## Matrix
 
-**Main Feature:** Rectangular and Numeric.
+**Main Feature:** Rectangular and Same typekni.
 
 ```{r}
 
@@ -667,7 +667,7 @@ str(bakers)
 **Using Numeric Index**
 
 ```{r}
-mtcars[,1] # primeira coluna
+bakers[,1] # primeira coluna
 ```
 
 ---
@@ -675,11 +675,11 @@ mtcars[,1] # primeira coluna
 **Textual Key**
 
 ```{r}
-mtcars$mpg
+bakers$hometown
 
 # Ou
 
-bakers[,"mpg"]
+bakers[,"hometown"]
 
 ```
 
@@ -712,15 +712,15 @@ bakers[bakers$hometown=="London",]
 
 ```{r eval=FALSE }
 
-head(mtcars) # First lines
+head(bakers) # First lines
 
-tail(mtcars) # last lines linhas
+tail(bakers) # last lines linhas
 
-summary(mtcars) # classes
+summary(bakers) # classes
 
-dim(mtcars) # dimensions
+dim(bakers) # dimensions
 
-glimpse(mtcars) # summary
+glimpse(bakers) # summary
 
 ```
 
