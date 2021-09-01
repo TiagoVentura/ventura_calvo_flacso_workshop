@@ -544,7 +544,7 @@ length(X)
 
 ## Matrix
 
-**Main Feature:** Rectangular and Same typekni.
+**Main Feature:** Rectangular and Same type.
 
 ```{r}
 
@@ -730,7 +730,7 @@ glimpse(bakers) # summary
 
 ## Exporting Data Frames.
 
-An crucial task you will perform in R relates to  exporting your results, including a new database. T
+An crucial task you will perform in R relates to  exporting your results, including a new dataframe. 
 
 There are several functions to do this, depending on the format of the output you want. Some examples:
 
@@ -763,7 +763,7 @@ We do this in two ways:
 
 1. Learn where your files are.
 
-2. Define your **working directory** for this folder: all your outputs and inputs will be there.
+2. Define your **working directory** for your preferred folder: all your outputs and inputs will be there.
 
 
 ---
@@ -789,7 +789,7 @@ A super useful way to organize your files in R is through the use of R projects.
 
 We are not going to cover this feature here in the workshop. 
 
-But, I strongly reccommend you to read about it [here]()
+But, I strongly recommend you to read about it [here](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 
 ---
 

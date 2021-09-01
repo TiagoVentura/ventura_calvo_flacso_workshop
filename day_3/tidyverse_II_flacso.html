@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Tidyverse II: Tidyr, Stringr and Scopped Verbs</title>
+    <title>Tidyverse II: Tidyr and Stringr</title>
     <meta charset="utf-8" />
     <meta name="author" content="Tiago Ventura" />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -11,7 +11,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Tidyverse II: Tidyr, Stringr and Scopped Verbs
+# Tidyverse II: Tidyr and Stringr
 ## IPSA-Flacso Summer School
 ### Tiago Ventura
 
@@ -26,7 +26,7 @@ Yesterday, we had our first immersion in using tidyverse for data manipulation.
 
 Today we will take a few new steps. 
 
-You will learn three new skills/packages:
+You will learn two new skills/packages:
 
 - Tidy your data, with `tidyr`
 
@@ -219,12 +219,13 @@ Four main functions:
 
 ## pivot_longer 
 
-### Multiple columns -&gt; A single columns
+#### Multiple columns -&gt; A single columns
 
 ![](./figs/gather.png)
 
+---
 
-Three main inputs:
+`pivot_longer()` has Three main inputs:
 
 - `cols`: columns to pivot into longer format
 - `names_to`: A string specifying the **name** of the column to stores the **name* of the old columns.
@@ -232,7 +233,7 @@ Three main inputs:
 
 ---
 
-## Exemplo
+## Exampe
 
 
 ```r
@@ -310,10 +311,11 @@ tab %&gt;%
 
 &lt;img src="./figs/spread.png" width="80%" /&gt;
 
+---
 
 ### Basics
 
-Two main inputs
+`pivote_wider()` has two main inputs
 
 - `names_from`: name of the column with names to be opened.
 - `values_from`: name of the columns with values to be opened.
@@ -449,8 +451,7 @@ class: middle, center, inverse
 
 ## Strings
 
-Strings = a bunch of character variables. 
-
+Strings = character variables. 
 
 We will learn several functions to manipulate strings in R. Fundamental for our future classes on scrapping and text analysis.
 
@@ -480,7 +481,7 @@ Two components:
 
 - Second Argument: textual pattern to be detected
 
---
+---
 
 `str_detect()`
 
@@ -609,9 +610,12 @@ Two main components
 
 
 ```r
+# Lets transform this collumn to a vector just os show a few more easy examples
+
 nomes&lt;-cand$NOME_URNA_CANDIDATO[1:10]
 ```
 
+---
 
 `str_sub()`: extract by position
 
@@ -621,7 +625,8 @@ str_sub(nomes, 1, 5)
 ```
 
 ```
-##  [1] "PASTO" "JUNIO" "RUDIL" "NELSO" "EURIC" "DJÊ C" "PAULO" "JESUS" "CHICO" "CABRA"
+##  [1] "PASTO" "JUNIO" "RUDIL" "NELSO" "EURIC" "DJÊ C" "PAULO" "JESUS" "CHICO"
+## [10] "CABRA"
 ```
 
 `str_subset()`: extract with a pattern

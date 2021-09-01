@@ -1,5 +1,5 @@
 ---
-title: "General Programming Class"
+title: "General Programming: Conditional, Loops and Functions"
 subtitle: "IPSA-Flacso Summer School"
 author: "Tiago Ventura"
 institute: ""
@@ -34,7 +34,7 @@ knitr::opts_chunk$set(message=FALSE, warning = FALSE, error=TRUE, cache=TRUE)
 
 Today we will cover more advanced programming skills. They are:
 
-- Conditional Flow.
+- Conditional Flows.
 - Functions.
 - Iteration.
 
@@ -48,6 +48,7 @@ class: inverse, middle, center
 ## Conditional Flow
 
 ---
+
 ## Conditional Flow
 
 It allows you to impose restrictions on your code. 
@@ -139,6 +140,7 @@ class:center, middle, inverse
 ## Loops
 
 ---
+
 # Loops
 
 As one quickly notes, doing any task in R can become redundant. Loops can dramatically increase the efficiency of our workflow when a task is _systematic and repeatable_.  
@@ -274,7 +276,7 @@ container
 
 ---
 class:center, middle, inverse
-## Loops
+## Functions
 
 ---
 ## What are Functions?
@@ -379,7 +381,8 @@ $$
 \texttt{you’ve copied and pasted a block of code more than twice"}
 $$
 
---- 
+---
+
 ### Applying a function to multiple objects. 
 
 Most of times, we will use our functions across different tasks. These taks can be distinct codes, or just distinct objects. 
@@ -402,11 +405,11 @@ We will conclude today learning more about the `map` functions from the `purrr` 
 
 We will just introduce you to the beautiful world of `purrr`. If you want to learn more, you shoudl see these tutorials. 
 
-- [here](https://jennybc.github.io/purrr-tutorial/), 
+- [Jenny BC tutorial](https://jennybc.github.io/purrr-tutorial/)
 
-- [here](http://www.rebeccabarter.com/blog/2019-08-19_purrr/), and 
+- [Rebeca Barter Tutorial](http://www.rebeccabarter.com/blog/2019-08-19_purrr/) 
 
-- [here](https://www.youtube.com/watch?v=bzUmK0Y07ck). 
+- [HAdley Wickham Class](https://www.youtube.com/watch?v=bzUmK0Y07ck)
 
 ---
 ### Purrr
@@ -458,7 +461,8 @@ data[[i]] <- read.csv(path[[i]])
 str(data, 1)
 ```
 
---- 
+---
+
 ## Using Map
 
 ```{r}
@@ -536,7 +540,7 @@ map(lista1, function(x) log(abs(sum(x))) + 100)
 
 ---
 
-Super brief introduction to purrr. We will learn more tomorrow with our scrapping classes. Check here for more materials:
+Super brief introduction to purrr. We will learn more tomorrow with our scrapping classes. And please,  Check here for more materials:
 
 
 - [here](https://jennybc.github.io/purrr-tutorial/), 

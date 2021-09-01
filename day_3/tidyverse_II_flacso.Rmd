@@ -1,5 +1,5 @@
 ---
-title: "Tidyverse II: Tidyr, Stringr and Scopped Verbs"
+title: "Tidyverse II: Tidyr and Stringr"
 subtitle: "IPSA-Flacso Summer School"
 author: "Tiago Ventura"
 institute: ""
@@ -36,7 +36,7 @@ Yesterday, we had our first immersion in using tidyverse for data manipulation.
 
 Today we will take a few new steps. 
 
-You will learn three new skills/packages:
+You will learn two new skills/packages:
 
 - Tidy your data, with `tidyr`
 
@@ -173,12 +173,13 @@ Four main functions:
 
 ## pivot_longer 
 
-### Multiple columns -> A single columns
+#### Multiple columns -> A single columns
 
 ![](./figs/gather.png)
 
+---
 
-Three main inputs:
+`pivot_longer()` has Three main inputs:
 
 - `cols`: columns to pivot into longer format
 - `names_to`: A string specifying the **name** of the column to stores the **name* of the old columns.
@@ -186,7 +187,7 @@ Three main inputs:
 
 ---
 
-## Exemplo
+## Exampe
 
 ```{r}
 
@@ -227,10 +228,11 @@ tab %>%
 knitr::include_graphics("./figs/spread.png")
 ```
 
+---
 
 ### Basics
 
-Two main inputs
+`pivote_wider()` has two main inputs
 
 - `names_from`: name of the column with names to be opened.
 - `values_from`: name of the columns with values to be opened.
@@ -319,8 +321,7 @@ class: middle, center, inverse
 
 ## Strings
 
-Strings = a bunch of character variables. 
-
+Strings = character variables. 
 
 We will learn several functions to manipulate strings in R. Fundamental for our future classes on scrapping and text analysis.
 
@@ -350,7 +351,7 @@ Two components:
 
 - Second Argument: textual pattern to be detected
 
---
+---
 
 `str_detect()`
 
@@ -433,9 +434,12 @@ Two main components
 - Second Argument: Textual pattern. 
 
 ```{r}
+# Lets transform this collumn to a vector just os show a few more easy examples
+
 nomes<-cand$NOME_URNA_CANDIDATO[1:10]
 ```
 
+---
 
 `str_sub()`: extract by position
 

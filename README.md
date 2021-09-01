@@ -67,9 +67,9 @@ R for Data Science
 
 ### Day III: Tidyverse II + Functional Programming + Loops
 
-- TTidyverse II: Tidy Data + Strings in R ([Presentation](), [Code]())
+- TTidyverse II: Tidy Data + Strings in R ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_3/tidyverse_II_flacso), [Code](https://www.dropbox.com/s/st6kfzo3c4k77qv/tidyverse_II_flacso.R?dl=0))
 
-- Functional Programming + Loops ([Presentation](), [Code]())
+- Functional Programming + Loops ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_3/general_programming_flacso), [Code](https://www.dropbox.com/s/slh4pwey2jc73x4/general_programming_flacso.R?dl=0))
 
 **Exercises and Readings for the Lab**
 
