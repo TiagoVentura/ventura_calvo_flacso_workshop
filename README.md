@@ -84,9 +84,11 @@ Rebeccas Barter Tutorial on [Purrr](https://www.rebeccabarter.com/blog/2019-01-2
 
 ### Day IV: Acessing Digital Data
 
-- Webscrapping ([Presentation](), [Code]())
+- Webscrapping ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_4/flacso_scrapping), [Code](https://www.dropbox.com/s/uj3j0vec4v727k0/flacso_scrapping.R?dl=0))
 
--  APIs ([Presentation](), [Code]())
+-  APIs ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_4/flacso_apis), [Code](https://www.dropbox.com/s/ha21qxr0k0bdwdk/flacso_apis.R?dl=0))
+
+-  Twitter API ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_4/twitter_api), [Code](https://www.dropbox.com/s/vnvgpys6xca06yh/twitter_api.R?dl=0))
 
 **Exercises and Readings for the Lab**
 
@@ -98,7 +100,7 @@ Check out all the excelente materials by Chris Bail on text analysis in R.
 
 ### Day V: Intro do Text-Analysis (Tidy approach)
 
-- Text analysis with tidy text ([Code]())
+- Text analysis with tidy text ([Presentation](https://tiagoventura.github.io/ventura_calvo_flacso_workshop/day_5/text_analysis_I),[Code](https://www.dropbox.com/s/tuh9qxb8llkox43/text_analysis_I.rmd?dl=0), [Data](https://www.dropbox.com/s/exg52mk5e1e1luq/data_txt.zip?dl=0))
 
 **Exercises and Readings for the Lab**
 
@@ -106,7 +108,7 @@ Text Minning with R
 
 - [Ch. 1: The tidy text format](https://www.tidytextmining.com/tidytext.html) 
 - [Ch. 2: Sentiment analysis with tidy data](https://www.tidytextmining.com/sentiment.html) 
-- [Ch. 3: Analyzing word and document frequency: tf-idf](https://www.tidytextmining.com/tfidf.html)  
+- [Ch. 3: Analyzing word and document frequency: tf-idf](dhttps://www.tidytextmining.com/tfidf.html)  
 - [Ch. 5: Converting to and from non-tidy formats](https://www.tidytextmining.com/dtm.html) 
 - [Ch. 6: Topic modeling](https://www.tidytextmining.com/topicmodeling.html) 
 

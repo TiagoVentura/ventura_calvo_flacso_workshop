@@ -190,7 +190,6 @@ Four main functions:
 ## Exampe
 
 ```{r}
-
 # Before = Wide 
 wide
 
@@ -251,7 +250,7 @@ tab2 %>%
 ```
 ---
 
-## Exempla II: Filling NAs
+## Example II: Filling NAs
 
 ```{r}
 

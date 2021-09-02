@@ -44,7 +44,7 @@ Today, we will do a brief overview about using the Twitter Rest and Stream Apis.
 To access the Twitter API, we will use the [rtweet](https://github.com/ropensci/rtweet) package. Our first step is to install the package.
 ```{r}
 
-devtools::install_github("ropensci/rtweet", force=TRUE)
+#devtools::install_github("ropensci/rtweet", force=TRUE)
 #install.packages("rtweet") # somente uma vez
 library(rtweet)
 library(tidyverse)
@@ -67,19 +67,19 @@ The `rtweet` package has an excellent tutorial on how to request developer acces
 
 ```{r, eval=FALSE}
 vignette("auth", package = "rtweet")
-get_token()
 ```
 
 ---
 
-After you get your credentials, you have to tell them to R. We do this creating objects (this is actually a functionality from thr rtweet package)
+After you get your credentials, you have to tell them to R. We do this creating objects (this is actually a functionality from the rtweet package)
 
 ```{r eval=FALSE}
-app_name<-"ufpa_workshop"
-consumer_key="x"
-consumer_secret="x"
-access_token<- "x"
-access_token_secret<-"x"
+app_name<-"Tiago Ventura"
+
+consumer_key="X"
+consumer_secret="X"
+access_token<- "X"
+access_token_secret<-"X"
 ```
 
 Create your accesss
@@ -172,7 +172,8 @@ That is it.
 Next week you will learn a lot of different ways to analyze all this data!
 
 
---- 
+---
+
 ## Academic API
 
 Twitter has recently launched a new api, called academic API, that gives you access to historical data on Twitter. It is amazing. 

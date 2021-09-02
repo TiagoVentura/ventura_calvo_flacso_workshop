@@ -32,6 +32,7 @@ Today, we will do a brief overview about using the Twitter Rest and Stream Apis.
 To access the Twitter API, we will use the [rtweet](https://github.com/ropensci/rtweet) package. Our first step is to install the package.
 
 ```r
+#devtools::install_github("ropensci/rtweet", force=TRUE)
 #install.packages("rtweet") # somente uma vez
 library(rtweet)
 library(tidyverse)
@@ -62,12 +63,16 @@ vignette("auth", package = "rtweet")
 After you get your credentials, you have to tell them to R. We do this creating objects (this is actually a functionality from thr rtweet package)
 
 
+
+
 ```r
 app_name&lt;-"Tiago Ventura"
-consumer_key="YCK015Uz3NeFEJJT1P6WvJH6u"
-consumer_secret="M3JhueRxcpaAp5ZQFxERrkhQOHpv4XKoj8ORDe81W39yuxqASg"
-access_token&lt;- "59554649-Q4jKEC2kPorNeDJNayoJTlEyQ12MudKgVjCKmGgTl"
-access_token_secret&lt;-"ShQrVKdSg89SPy4lrTKDjujt8Tu0JZV1qEF3mEbwKJ1Mm"
+
+consumer_key="X"
+
+consumer_secret="X"
+access_token&lt;- "X"
+access_token_secret&lt;-"X"
 ```
 
 Create your accesss
@@ -79,19 +84,6 @@ create_token(app=app_name,
              consumer_secret=consumer_secret,
              access_token = access_token, 
              access_secret = access_token_secret)
-```
-
-```
-## &lt;Token&gt;
-## &lt;oauth_endpoint&gt;
-##  request:   https://api.twitter.com/oauth/request_token
-##  authorize: https://api.twitter.com/oauth/authenticate
-##  access:    https://api.twitter.com/oauth/access_token
-## &lt;oauth_app&gt; Tiago Ventura
-##   key:    YCK015Uz3NeFEJJT1P6WvJH6u
-##   secret: &lt;hidden&gt;
-## &lt;credentials&gt; oauth_token, oauth_token_secret
-## ---
 ```
 
 This functions saves your credentials in your environment. You don't need to repeat this in the future. 
@@ -111,55 +103,30 @@ To use this function, you need to enter a search term. Twitter's advanced search
 
 ```r
 bolsonaro_tweets&lt;-search_tweets("bolsonaro", n=50, include_rts = TRUE)
-
-bolsonaro_tweets
+bolsonaro_tweets %&gt;% as_tibble()
 ```
 
 ```
-## # A tibble: 50 x 90
-##    user_id   status_id   created_at          screen_name  text           source 
-##    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;  
-##  1 78420115… 1432911386… 2021-09-01 03:41:11 PaulaRenata… "Mexeu, fedeu… Twitte…
-##  2 13866563… 1432911380… 2021-09-01 03:41:10 banana_ginna "ado ado ado … Twitte…
-##  3 19393726  1432911379… 2021-09-01 03:41:09 jcruzeta     "Nem Lula nem… Twitte…
-##  4 867256615 1432911377… 2021-09-01 03:41:09 RosadiogoRo… "Barroso e Fu… Twitte…
-##  5 65490398  1432911375… 2021-09-01 03:41:08 RealMinerRR  "Na passagem … Twitte…
-##  6 12673424… 1432911374… 2021-09-01 03:41:08 alinedanelli "Bolsonaro co… Twitte…
-##  7 47141131… 1432911370… 2021-09-01 03:41:07 taureis_     "Moleque de r… Twitte…
-##  8 25939877… 1432911370… 2021-09-01 03:41:07 lima8641     "Estamos nos … Twitte…
-##  9 13477001… 1432911368… 2021-09-01 03:41:07 Mayflower_21 "Everyone in … Twitte…
-## 10 193201884 1432911366… 2021-09-01 03:41:06 PraMariza    "Mais um ataq… Twitte…
-## # … with 40 more rows, and 84 more variables: display_text_width &lt;dbl&gt;,
-## #   reply_to_status_id &lt;chr&gt;, reply_to_user_id &lt;chr&gt;,
-## #   reply_to_screen_name &lt;chr&gt;, is_quote &lt;lgl&gt;, is_retweet &lt;lgl&gt;,
-## #   favorite_count &lt;int&gt;, retweet_count &lt;int&gt;, quote_count &lt;int&gt;,
-## #   reply_count &lt;int&gt;, hashtags &lt;list&gt;, symbols &lt;list&gt;, urls_url &lt;list&gt;,
-## #   urls_t.co &lt;list&gt;, urls_expanded_url &lt;list&gt;, media_url &lt;list&gt;,
-## #   media_t.co &lt;list&gt;, media_expanded_url &lt;list&gt;, media_type &lt;list&gt;,
-## #   ext_media_url &lt;list&gt;, ext_media_t.co &lt;list&gt;, ext_media_expanded_url &lt;list&gt;,
-## #   ext_media_type &lt;chr&gt;, mentions_user_id &lt;list&gt;, mentions_screen_name &lt;list&gt;,
-## #   lang &lt;chr&gt;, quoted_status_id &lt;chr&gt;, quoted_text &lt;chr&gt;,
-## #   quoted_created_at &lt;dttm&gt;, quoted_source &lt;chr&gt;, quoted_favorite_count &lt;int&gt;,
-## #   quoted_retweet_count &lt;int&gt;, quoted_user_id &lt;chr&gt;, quoted_screen_name &lt;chr&gt;,
-## #   quoted_name &lt;chr&gt;, quoted_followers_count &lt;int&gt;,
-## #   quoted_friends_count &lt;int&gt;, quoted_statuses_count &lt;int&gt;,
-## #   quoted_location &lt;chr&gt;, quoted_description &lt;chr&gt;, quoted_verified &lt;lgl&gt;,
-## #   retweet_status_id &lt;chr&gt;, retweet_text &lt;chr&gt;, retweet_created_at &lt;dttm&gt;,
-## #   retweet_source &lt;chr&gt;, retweet_favorite_count &lt;int&gt;,
-## #   retweet_retweet_count &lt;int&gt;, retweet_user_id &lt;chr&gt;,
-## #   retweet_screen_name &lt;chr&gt;, retweet_name &lt;chr&gt;,
-## #   retweet_followers_count &lt;int&gt;, retweet_friends_count &lt;int&gt;,
-## #   retweet_statuses_count &lt;int&gt;, retweet_location &lt;chr&gt;,
-## #   retweet_description &lt;chr&gt;, retweet_verified &lt;lgl&gt;, place_url &lt;chr&gt;,
-## #   place_name &lt;chr&gt;, place_full_name &lt;chr&gt;, place_type &lt;chr&gt;, country &lt;chr&gt;,
-## #   country_code &lt;chr&gt;, geo_coords &lt;list&gt;, coords_coords &lt;list&gt;,
-## #   bbox_coords &lt;list&gt;, status_url &lt;chr&gt;, name &lt;chr&gt;, location &lt;chr&gt;,
-## #   description &lt;chr&gt;, url &lt;chr&gt;, protected &lt;lgl&gt;, followers_count &lt;int&gt;,
-## #   friends_count &lt;int&gt;, listed_count &lt;int&gt;, statuses_count &lt;int&gt;,
-## #   favourites_count &lt;int&gt;, account_created_at &lt;dttm&gt;, verified &lt;lgl&gt;,
-## #   profile_url &lt;chr&gt;, profile_expanded_url &lt;chr&gt;, account_lang &lt;lgl&gt;,
-## #   profile_banner_url &lt;chr&gt;, profile_background_url &lt;chr&gt;,
-## #   profile_image_url &lt;chr&gt;
+## # A tibble: 50 × 35
+##    created_at        id id_str  full_text    truncated display_text_ra… entities
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;lgl&gt;                &lt;dbl&gt; &lt;list&gt;  
+##  1 Tue Aug 31 … 1.43e18 143282… "Na passage… FALSE                   49 &lt;named …
+##  2 Wed Sep 01 … 1.43e18 143288… "Bastidores… FALSE                  280 &lt;named …
+##  3 Wed Sep 01 … 1.43e18 143316… "Exclusivo … FALSE                  176 &lt;named …
+##  4 Thu Sep 02 … 1.43e18 143323… "RT @Guilhe… FALSE                   77 &lt;named …
+##  5 Thu Sep 02 … 1.43e18 143323… "RT @Hays88… FALSE                  140 &lt;named …
+##  6 Thu Sep 02 … 1.43e18 143323… "RT @Deputa… FALSE                  140 &lt;named …
+##  7 Thu Sep 02 … 1.43e18 143323… "RT @tietad… FALSE                  128 &lt;named …
+##  8 Thu Sep 02 … 1.43e18 143323… "RT @PATRlO… FALSE                  140 &lt;named …
+##  9 Thu Sep 02 … 1.43e18 143323… "Após press… FALSE                  188 &lt;named …
+## 10 Thu Sep 02 … 1.43e18 143323… "RT @SigaGa… FALSE                  140 &lt;named …
+## # … with 40 more rows, and 28 more variables: metadata &lt;list&gt;, source &lt;chr&gt;,
+## #   in_reply_to_status_id &lt;dbl&gt;, in_reply_to_status_id_str &lt;chr&gt;,
+## #   in_reply_to_user_id &lt;int&gt;, in_reply_to_user_id_str &lt;chr&gt;,
+## #   in_reply_to_screen_name &lt;chr&gt;, geo &lt;lgl&gt;, coordinates &lt;list&gt;, place &lt;list&gt;,
+## #   contributors &lt;lgl&gt;, is_quote_status &lt;lgl&gt;, retweet_count &lt;int&gt;,
+## #   favorite_count &lt;int&gt;, favorited &lt;lgl&gt;, retweeted &lt;lgl&gt;,
+## #   possibly_sensitive &lt;lgl&gt;, lang &lt;chr&gt;, retweeted_status &lt;list&gt;, …
 ```
 
 ---
@@ -170,54 +137,30 @@ Allows you to get the timeline of certain profiles
 
 ```r
 timelines_covid &lt;- get_timelines(c("renancalheiros", "ottoalencar", "EduGiraoOficial"), n=100)
-timelines_covid
+timelines_covid %&gt;% as_tibble()
 ```
 
 ```
-## # A tibble: 300 x 90
-##    user_id  status_id   created_at          screen_name  text            source 
-##    &lt;chr&gt;    &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;  
-##  1 1650330… 1432027638… 2021-08-29 17:09:29 renancalhei… "A CPI vem mos… Twitte…
-##  2 1650330… 1431997581… 2021-08-29 15:10:03 renancalhei… "Lúcido, claro… Twitte…
-##  3 1650330… 1431620109… 2021-08-28 14:10:07 renancalhei… "Tentaram na J… Twitte…
-##  4 1650330… 1430981496… 2021-08-26 19:52:29 renancalhei… "No começo era… Twitte…
-##  5 1650330… 1430611896… 2021-08-25 19:23:50 renancalhei… "O depoimento … Twitte…
-##  6 1650330… 1430209716… 2021-08-24 16:45:43 renancalhei… "Os atravessad… Twitte…
-##  7 1650330… 1429811822… 2021-08-23 14:24:37 renancalhei… "Os coices aut… Twitte…
-##  8 1650330… 1428839362… 2021-08-20 22:00:25 renancalhei… "Nunca se viu … Twitte…
-##  9 1650330… 1428423185… 2021-08-19 18:26:40 renancalhei… "A CPI tentou … Twitte…
-## 10 1650330… 1428103359… 2021-08-18 21:15:48 renancalhei… "Em junho, por… Twitte…
-## # … with 290 more rows, and 84 more variables: display_text_width &lt;dbl&gt;,
-## #   reply_to_status_id &lt;chr&gt;, reply_to_user_id &lt;chr&gt;,
-## #   reply_to_screen_name &lt;chr&gt;, is_quote &lt;lgl&gt;, is_retweet &lt;lgl&gt;,
-## #   favorite_count &lt;int&gt;, retweet_count &lt;int&gt;, quote_count &lt;int&gt;,
-## #   reply_count &lt;int&gt;, hashtags &lt;list&gt;, symbols &lt;list&gt;, urls_url &lt;list&gt;,
-## #   urls_t.co &lt;list&gt;, urls_expanded_url &lt;list&gt;, media_url &lt;list&gt;,
-## #   media_t.co &lt;list&gt;, media_expanded_url &lt;list&gt;, media_type &lt;list&gt;,
-## #   ext_media_url &lt;list&gt;, ext_media_t.co &lt;list&gt;, ext_media_expanded_url &lt;list&gt;,
-## #   ext_media_type &lt;chr&gt;, mentions_user_id &lt;list&gt;, mentions_screen_name &lt;list&gt;,
-## #   lang &lt;chr&gt;, quoted_status_id &lt;chr&gt;, quoted_text &lt;chr&gt;,
-## #   quoted_created_at &lt;dttm&gt;, quoted_source &lt;chr&gt;, quoted_favorite_count &lt;int&gt;,
-## #   quoted_retweet_count &lt;int&gt;, quoted_user_id &lt;chr&gt;, quoted_screen_name &lt;chr&gt;,
-## #   quoted_name &lt;chr&gt;, quoted_followers_count &lt;int&gt;,
-## #   quoted_friends_count &lt;int&gt;, quoted_statuses_count &lt;int&gt;,
-## #   quoted_location &lt;chr&gt;, quoted_description &lt;chr&gt;, quoted_verified &lt;lgl&gt;,
-## #   retweet_status_id &lt;chr&gt;, retweet_text &lt;chr&gt;, retweet_created_at &lt;dttm&gt;,
-## #   retweet_source &lt;chr&gt;, retweet_favorite_count &lt;int&gt;,
-## #   retweet_retweet_count &lt;int&gt;, retweet_user_id &lt;chr&gt;,
-## #   retweet_screen_name &lt;chr&gt;, retweet_name &lt;chr&gt;,
-## #   retweet_followers_count &lt;int&gt;, retweet_friends_count &lt;int&gt;,
-## #   retweet_statuses_count &lt;int&gt;, retweet_location &lt;chr&gt;,
-## #   retweet_description &lt;chr&gt;, retweet_verified &lt;lgl&gt;, place_url &lt;chr&gt;,
-## #   place_name &lt;chr&gt;, place_full_name &lt;chr&gt;, place_type &lt;chr&gt;, country &lt;chr&gt;,
-## #   country_code &lt;chr&gt;, geo_coords &lt;list&gt;, coords_coords &lt;list&gt;,
-## #   bbox_coords &lt;list&gt;, status_url &lt;chr&gt;, name &lt;chr&gt;, location &lt;chr&gt;,
-## #   description &lt;chr&gt;, url &lt;chr&gt;, protected &lt;lgl&gt;, followers_count &lt;int&gt;,
-## #   friends_count &lt;int&gt;, listed_count &lt;int&gt;, statuses_count &lt;int&gt;,
-## #   favourites_count &lt;int&gt;, account_created_at &lt;dttm&gt;, verified &lt;lgl&gt;,
-## #   profile_url &lt;chr&gt;, profile_expanded_url &lt;chr&gt;, account_lang &lt;lgl&gt;,
-## #   profile_banner_url &lt;chr&gt;, profile_background_url &lt;chr&gt;,
-## #   profile_image_url &lt;chr&gt;
+## # A tibble: 300 × 35
+##    created_at        id id_str  full_text    truncated display_text_ra… entities
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;lgl&gt;                &lt;dbl&gt; &lt;list&gt;  
+##  1 Wed Sep 01 … 1.43e18 143312… "Há algo de… FALSE                  275 &lt;named …
+##  2 Sun Aug 29 … 1.43e18 143202… "A CPI vem … FALSE                  233 &lt;named …
+##  3 Sun Aug 29 … 1.43e18 143199… "Lúcido, cl… FALSE                  206 &lt;named …
+##  4 Sat Aug 28 … 1.43e18 143162… "Tentaram n… FALSE                  274 &lt;named …
+##  5 Thu Aug 26 … 1.43e18 143098… "No começo … FALSE                  257 &lt;named …
+##  6 Wed Aug 25 … 1.43e18 143061… "O depoimen… FALSE                  280 &lt;named …
+##  7 Tue Aug 24 … 1.43e18 143020… "Os atraves… FALSE                  272 &lt;named …
+##  8 Mon Aug 23 … 1.43e18 142981… "Os coices … FALSE                  271 &lt;named …
+##  9 Fri Aug 20 … 1.43e18 142883… "Nunca se v… FALSE                  280 &lt;named …
+## 10 Thu Aug 19 … 1.43e18 142842… "A CPI tent… FALSE                  280 &lt;named …
+## # … with 290 more rows, and 28 more variables: source &lt;chr&gt;,
+## #   in_reply_to_status_id &lt;dbl&gt;, in_reply_to_status_id_str &lt;chr&gt;,
+## #   in_reply_to_user_id &lt;dbl&gt;, in_reply_to_user_id_str &lt;chr&gt;,
+## #   in_reply_to_screen_name &lt;chr&gt;, geo &lt;lgl&gt;, coordinates &lt;list&gt;, place &lt;list&gt;,
+## #   contributors &lt;lgl&gt;, is_quote_status &lt;lgl&gt;, retweet_count &lt;int&gt;,
+## #   favorite_count &lt;int&gt;, favorited &lt;lgl&gt;, retweeted &lt;lgl&gt;, lang &lt;chr&gt;,
+## #   possibly_sensitive &lt;lgl&gt;, quoted_status_id &lt;dbl&gt;, …
 ```
 
 ---
@@ -229,47 +172,21 @@ timelines_covid
 ```r
 users &lt;- lookup_users(c("renancalheiros", "ottoalencar", "EduGiraoOficial"))
 
-users
+users %&gt;%as_tibble()
 ```
 
 ```
-## # A tibble: 3 x 90
-##   user_id   status_id   created_at          screen_name  text            source 
-##   &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;  
-## 1 16503303… 1432027638… 2021-08-29 17:09:29 renancalhei… A CPI vem most… Twitte…
-## 2 23775027… 1431575463… 2021-08-28 11:12:42 ottoalencar  @edenvaladares… Twitte…
-## 3 10244033… 1432778344… 2021-08-31 18:52:31 EduGiraoOfi… O Senado aprov… Twitte…
-## # … with 84 more variables: display_text_width &lt;int&gt;, reply_to_status_id &lt;chr&gt;,
-## #   reply_to_user_id &lt;chr&gt;, reply_to_screen_name &lt;chr&gt;, is_quote &lt;lgl&gt;,
-## #   is_retweet &lt;lgl&gt;, favorite_count &lt;int&gt;, retweet_count &lt;int&gt;,
-## #   quote_count &lt;int&gt;, reply_count &lt;int&gt;, hashtags &lt;list&gt;, symbols &lt;list&gt;,
-## #   urls_url &lt;list&gt;, urls_t.co &lt;list&gt;, urls_expanded_url &lt;list&gt;,
-## #   media_url &lt;list&gt;, media_t.co &lt;list&gt;, media_expanded_url &lt;list&gt;,
-## #   media_type &lt;list&gt;, ext_media_url &lt;list&gt;, ext_media_t.co &lt;list&gt;,
-## #   ext_media_expanded_url &lt;list&gt;, ext_media_type &lt;chr&gt;,
-## #   mentions_user_id &lt;list&gt;, mentions_screen_name &lt;list&gt;, lang &lt;chr&gt;,
-## #   quoted_status_id &lt;chr&gt;, quoted_text &lt;chr&gt;, quoted_created_at &lt;dttm&gt;,
-## #   quoted_source &lt;chr&gt;, quoted_favorite_count &lt;int&gt;,
-## #   quoted_retweet_count &lt;int&gt;, quoted_user_id &lt;chr&gt;, quoted_screen_name &lt;chr&gt;,
-## #   quoted_name &lt;chr&gt;, quoted_followers_count &lt;int&gt;,
-## #   quoted_friends_count &lt;int&gt;, quoted_statuses_count &lt;int&gt;,
-## #   quoted_location &lt;chr&gt;, quoted_description &lt;chr&gt;, quoted_verified &lt;lgl&gt;,
-## #   retweet_status_id &lt;chr&gt;, retweet_text &lt;chr&gt;, retweet_created_at &lt;dttm&gt;,
-## #   retweet_source &lt;chr&gt;, retweet_favorite_count &lt;int&gt;,
-## #   retweet_retweet_count &lt;int&gt;, retweet_user_id &lt;chr&gt;,
-## #   retweet_screen_name &lt;chr&gt;, retweet_name &lt;chr&gt;,
-## #   retweet_followers_count &lt;int&gt;, retweet_friends_count &lt;int&gt;,
-## #   retweet_statuses_count &lt;int&gt;, retweet_location &lt;chr&gt;,
-## #   retweet_description &lt;chr&gt;, retweet_verified &lt;lgl&gt;, place_url &lt;chr&gt;,
-## #   place_name &lt;chr&gt;, place_full_name &lt;chr&gt;, place_type &lt;chr&gt;, country &lt;chr&gt;,
-## #   country_code &lt;chr&gt;, geo_coords &lt;list&gt;, coords_coords &lt;list&gt;,
-## #   bbox_coords &lt;list&gt;, status_url &lt;chr&gt;, name &lt;chr&gt;, location &lt;chr&gt;,
-## #   description &lt;chr&gt;, url &lt;chr&gt;, protected &lt;lgl&gt;, followers_count &lt;int&gt;,
-## #   friends_count &lt;int&gt;, listed_count &lt;int&gt;, statuses_count &lt;int&gt;,
-## #   favourites_count &lt;int&gt;, account_created_at &lt;dttm&gt;, verified &lt;lgl&gt;,
-## #   profile_url &lt;chr&gt;, profile_expanded_url &lt;chr&gt;, account_lang &lt;lgl&gt;,
-## #   profile_banner_url &lt;chr&gt;, profile_background_url &lt;chr&gt;,
-## #   profile_image_url &lt;chr&gt;
+## # A tibble: 3 × 21
+##        id id_str  name   screen_name  location  description     url    protected
+##     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;  &lt;lgl&gt;    
+## 1 1.65e 9 165033… Renan… renancalhei… ""        Senador da Rep… https… FALSE    
+## 2 2.38e 9 237750… Otto … ottoalencar  "Bahia"   Perfil Oficial… https… FALSE    
+## 3 1.02e18 102440… Eduar… EduGiraoOfi… "Fortale… Senador indepe… https… FALSE    
+## # … with 13 more variables: followers_count &lt;int&gt;, friends_count &lt;int&gt;,
+## #   listed_count &lt;int&gt;, created_at &lt;chr&gt;, favourites_count &lt;int&gt;,
+## #   verified &lt;lgl&gt;, statuses_count &lt;int&gt;, profile_image_url_https &lt;chr&gt;,
+## #   profile_banner_url &lt;chr&gt;, default_profile &lt;lgl&gt;,
+## #   default_profile_image &lt;lgl&gt;, withheld_in_countries &lt;list&gt;, entities &lt;list&gt;
 ```
 
 ---
@@ -278,54 +195,30 @@ users
 
 ```r
 favs &lt;- get_favorites(c("renancalheiros", "ottoalencar", "EduGiraoOficial"))
-favs
+favs %&gt;% as_tibble()
 ```
 
 ```
-## # A tibble: 1,054 x 91
-##    user_id   status_id   created_at          screen_name  text           source 
-##  * &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;  
-##  1 10076638… 1430938457… 2021-08-26 17:01:28 ZeDirceu_    "Ao menos uma… Twitte…
-##  2 24459217… 1429822714… 2021-08-23 15:07:54 OmarAzizSen… "Tentam provo… Twitte…
-##  3 14013635… 1429812134… 2021-08-23 14:25:52 IgorMontiel  "@renancalhei… Twitte…
-##  4 11533434… 1428039080… 2021-08-18 17:00:23 panchitobla… "@renancalhei… Twitte…
-##  5 13452063… 1425884844… 2021-08-12 18:20:13 desmentindo… "Aos cuidados… Twitte…
-##  6 13853772… 1424920471… 2021-08-10 02:28:08 GabideLB     "@rodaviva @r… Twitte…
-##  7 10490849… 1424917967… 2021-08-10 02:18:11 bolsoregrets "Talvez se um… Twitte…
-##  8 84718339… 1424911851… 2021-08-10 01:53:53 vanessasoar… "Que imbecil.… Twitte…
-##  9 13838911… 1424898887… 2021-08-10 01:02:22 camarotedac… "🍿 Boa noite,… Twitte…
-## 10 13838911… 1410243643… 2021-06-30 14:27:40 camarotedac… "Renan pede p… Twitte…
-## # … with 1,044 more rows, and 85 more variables: display_text_width &lt;dbl&gt;,
-## #   reply_to_status_id &lt;chr&gt;, reply_to_user_id &lt;chr&gt;,
-## #   reply_to_screen_name &lt;chr&gt;, is_quote &lt;lgl&gt;, is_retweet &lt;lgl&gt;,
-## #   favorite_count &lt;int&gt;, retweet_count &lt;int&gt;, quote_count &lt;int&gt;,
-## #   reply_count &lt;int&gt;, hashtags &lt;list&gt;, symbols &lt;list&gt;, urls_url &lt;list&gt;,
-## #   urls_t.co &lt;list&gt;, urls_expanded_url &lt;list&gt;, media_url &lt;list&gt;,
-## #   media_t.co &lt;list&gt;, media_expanded_url &lt;list&gt;, media_type &lt;list&gt;,
-## #   ext_media_url &lt;list&gt;, ext_media_t.co &lt;list&gt;, ext_media_expanded_url &lt;list&gt;,
-## #   ext_media_type &lt;chr&gt;, mentions_user_id &lt;list&gt;, mentions_screen_name &lt;list&gt;,
-## #   lang &lt;chr&gt;, quoted_status_id &lt;chr&gt;, quoted_text &lt;chr&gt;,
-## #   quoted_created_at &lt;dttm&gt;, quoted_source &lt;chr&gt;, quoted_favorite_count &lt;int&gt;,
-## #   quoted_retweet_count &lt;int&gt;, quoted_user_id &lt;chr&gt;, quoted_screen_name &lt;chr&gt;,
-## #   quoted_name &lt;chr&gt;, quoted_followers_count &lt;int&gt;,
-## #   quoted_friends_count &lt;int&gt;, quoted_statuses_count &lt;int&gt;,
-## #   quoted_location &lt;chr&gt;, quoted_description &lt;chr&gt;, quoted_verified &lt;lgl&gt;,
-## #   retweet_status_id &lt;chr&gt;, retweet_text &lt;chr&gt;, retweet_created_at &lt;dttm&gt;,
-## #   retweet_source &lt;chr&gt;, retweet_favorite_count &lt;int&gt;,
-## #   retweet_retweet_count &lt;int&gt;, retweet_user_id &lt;chr&gt;,
-## #   retweet_screen_name &lt;chr&gt;, retweet_name &lt;chr&gt;,
-## #   retweet_followers_count &lt;int&gt;, retweet_friends_count &lt;int&gt;,
-## #   retweet_statuses_count &lt;int&gt;, retweet_location &lt;chr&gt;,
-## #   retweet_description &lt;chr&gt;, retweet_verified &lt;lgl&gt;, place_url &lt;chr&gt;,
-## #   place_name &lt;chr&gt;, place_full_name &lt;chr&gt;, place_type &lt;chr&gt;, country &lt;chr&gt;,
-## #   country_code &lt;chr&gt;, geo_coords &lt;list&gt;, coords_coords &lt;list&gt;,
-## #   bbox_coords &lt;list&gt;, status_url &lt;chr&gt;, name &lt;chr&gt;, location &lt;chr&gt;,
-## #   description &lt;chr&gt;, url &lt;chr&gt;, protected &lt;lgl&gt;, followers_count &lt;int&gt;,
-## #   friends_count &lt;int&gt;, listed_count &lt;int&gt;, statuses_count &lt;int&gt;,
-## #   favourites_count &lt;int&gt;, account_created_at &lt;dttm&gt;, verified &lt;lgl&gt;,
-## #   profile_url &lt;chr&gt;, profile_expanded_url &lt;chr&gt;, account_lang &lt;lgl&gt;,
-## #   profile_banner_url &lt;chr&gt;, profile_background_url &lt;chr&gt;,
-## #   profile_image_url &lt;chr&gt;, favorited_by &lt;chr&gt;
+## # A tibble: 586 × 35
+##    created_at        id id_str  full_text    truncated display_text_ra… entities
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;lgl&gt;                &lt;dbl&gt; &lt;list&gt;  
+##  1 Thu Aug 26 … 1.43e18 143093… "Ao menos u… FALSE                  252 &lt;named …
+##  2 Mon Aug 23 … 1.43e18 142982… "Tentam pro… FALSE                  196 &lt;named …
+##  3 Mon Aug 23 … 1.43e18 142981… "@renancalh… FALSE                   35 &lt;named …
+##  4 Wed Aug 18 … 1.43e18 142803… "@renancalh… FALSE                  290 &lt;named …
+##  5 Thu Aug 12 … 1.43e18 142588… "Aos cuidad… FALSE                  166 &lt;named …
+##  6 Tue Aug 10 … 1.42e18 142492… "@rodaviva … FALSE                  205 &lt;named …
+##  7 Tue Aug 10 … 1.42e18 142491… "Talvez se … FALSE                  142 &lt;named …
+##  8 Tue Aug 10 … 1.42e18 142491… "Que imbeci… FALSE                  155 &lt;named …
+##  9 Tue Aug 10 … 1.42e18 142489… "🍿 Boa noit… FALSE                   76 &lt;named …
+## 10 Fri Aug 06 … 1.42e18 142345… "@renancalh… FALSE                   56 &lt;named …
+## # … with 576 more rows, and 28 more variables: source &lt;chr&gt;,
+## #   in_reply_to_status_id &lt;dbl&gt;, in_reply_to_status_id_str &lt;chr&gt;,
+## #   in_reply_to_user_id &lt;dbl&gt;, in_reply_to_user_id_str &lt;chr&gt;,
+## #   in_reply_to_screen_name &lt;chr&gt;, geo &lt;lgl&gt;, coordinates &lt;list&gt;, place &lt;list&gt;,
+## #   contributors &lt;lgl&gt;, is_quote_status &lt;lgl&gt;, retweet_count &lt;int&gt;,
+## #   favorite_count &lt;int&gt;, favorited &lt;lgl&gt;, retweeted &lt;lgl&gt;, lang &lt;chr&gt;,
+## #   possibly_sensitive &lt;lgl&gt;, quoted_status_id &lt;dbl&gt;, …
 ```
 
 ---
@@ -334,23 +227,23 @@ favs
 
 ```r
 follow_renan &lt;- get_followers("renancalheiros")
-follow_renan
+follow_renan %&gt;% as_tibble()
 ```
 
 ```
-## # A tibble: 5,000 x 1
+## # A tibble: 5,000 × 1
 ##    user_id            
 ##    &lt;chr&gt;              
-##  1 1432793231721439237
-##  2 1426919515141648384
-##  3 3128113588         
-##  4 1206789768073363456
-##  5 1181730315947130880
-##  6 3599905463         
-##  7 3254377181         
-##  8 1420210069082415105
-##  9 1399326700715003905
-## 10 1432892709317091328
+##  1 1375834301611249664
+##  2 2835848034         
+##  3 1364542712050053122
+##  4 818807714310520832 
+##  5 1370688111114588162
+##  6 1376229663731720192
+##  7 1250763710660034561
+##  8 1409213818106900483
+##  9 944992259761516544 
+## 10 1426647301137764357
 ## # … with 4,990 more rows
 ```
 
@@ -361,20 +254,21 @@ Twitter has a second API where you can sample the tweets being produced in real 
 
 
 ```r
-election &lt;- stream_tweets("election", timeout = 100, file_name = "file.json")
+election &lt;- stream_tweets("", 
+                          timeout = 100, 
+                          file_name = "file.json")
+```
+
+```
+## Error in open.connection(stream, "rb"): HTTP error 401.
+```
+
+```r
 election
 ```
 
 ```
-## NULL
-```
-
-```r
-getwd()
-```
-
-```
-## [1] "/home/venturat/Dropbox/Workshops/flacso_workshop_/day_4"
+## Error in eval(expr, envir, enclos): object 'election' not found
 ```
 
 ---
@@ -382,6 +276,19 @@ getwd()
 That is it. 
 
 Next week you will learn a lot of different ways to analyze all this data!
+
+
+---
+
+## Academic API
+
+Twitter has recently launched a new api, called academic API, that gives you access to historical data on Twitter. It is amazing. 
+
+To use it, you need a different authorization. And also another r package. Here is some places where you can find the information. 
+
+[a 101 course](https://github.com/twitterdev/getting-started-with-the-twitter-api-v2-for-academic-research)
+
+[academictwitteR](https://github.com/cjbarrie/academictwitteR)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

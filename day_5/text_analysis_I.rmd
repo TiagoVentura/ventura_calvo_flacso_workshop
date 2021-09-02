@@ -12,7 +12,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval=TRUE, cache=TRUE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, cache=TRUE, warning = FALSE, error = TRUE)
 ```
 # Introduction
 
@@ -26,7 +26,7 @@ In today's class, we're going to take our first steps in using R for text analys
 
 I strongly recommend that students read the book [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/index.html). This tutorial for today is heavily inspired by this beautiful book by Julia Silge and David Robinson.
 
-All data used in this tutorial can be downloaded [here](data_txt.zip)
+All data used in this tutorial can be downloaded [here](data_txt.zip). Open this data at the same place you have the rmd, and everything should work smoothly
 
 # Review: String Manipulation in R
 
@@ -41,14 +41,16 @@ As a programming language, R is pretty flexible on which types of data can be im
 
 The easiest way to access text data in R  is importing some type of digital text data directly to your environment. For example, we're going to access data from the Twitter API using the `rtweet` package.
 
+
 ```{r}
 library(rtweet)
 library(tidyverse)
 bolsonaro_tweets<-search_tweets("bolsonaro", n=50, include_rts = TRUE)
-
+colnames(bolsonaro_tweets)
 # Select only the text.
 bolsonaro_tweets <- bolsonaro_tweets %>%
-                        select(user_id, screen_name, text)
+                        select(id, id_str, full_text) %>%
+                        as_tibble()
                             
 # see the data.
 bolsonaro_tweets
@@ -65,13 +67,14 @@ In the "data_txt" folder, I saved ten speeches by deputies in the chamber floor 
 
 ```{r}
 # see the files
-list.files("data_txt")
+
+list.files("./day_5/data_txt")
 
 # save names
-nomes <- list.files("data_txt")
+nomes <- list.files("./day_5/data_txt")
 
 # create a path
-path <- paste0("data_txt/", nomes)
+path <- paste0("./day_5/data_txt/", nomes)
 
 # open
 dados <- map_chr(path, read_lines) 
@@ -86,8 +89,7 @@ Sometimes you will find text files saved as `.csv` Opening them is as simple as 
 
 
 ```{r}
-discursos <- read_csv("speeches.csv")
-
+discursos <- read_csv("./day_5/speeches.csv")
 ```
 
 The other popular way to acess data is via pdfs. We ar enot going to cover this process here because it is a bit more cumbersome, but I am happy to send you some code on how to do it in case you are interested. 
@@ -120,12 +122,13 @@ library(tidytext)
 tidy_discursos <- discursos %>%
                   mutate(id_discursos=1:nrow(.)) %>%
                    unnest_tokens(words, speech) #(output, input)
+tidy_discursos
 
 ```
 
 The two basic arguments for unnest_tokens used here are column names. First we have the name of the output column (the name of the new column) that will be created, and then the input column that the text comes from (speech in this case).
 
-Note: punctuations are removed and texts are converted to lowercase.
+Note: punctuation is removed and texts are converted to lowercase.
 
 ### Other forms of tidy texts.
 

@@ -1,5 +1,5 @@
 ---
-title: "Scrapping Digital Data"
+title: "APIs"
 subtitle: "IPSA-Flacso Summer School"
 author: "Tiago Ventura"
 institute: ""
@@ -27,7 +27,7 @@ xaringanthemer::style_mono_accent(base_color ="#23395b",
                                  code_font_size = "60%")
 
 options(htmltools.dir.version = FALSE)
-knitr::opts_chunk$set(message=FALSE, warning = FALSE, error=TRUE)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE, error=TRUE, cache=TRUE)
 
 
 ``` 
@@ -127,16 +127,15 @@ content(acesso)
 # Access the content.
 
 link_image <- content(acesso)$message
-download.file("https://images.dog.ceo/breeds/poodle-standard/n02113799_1439.jpg", 
+download.file(link_image, 
               destfile = "cao.png")
 ```
 
 ---
 
-```{r}
+```{r out.width="80%", echo=FALSE}
 knitr::include_graphics("cao.png")
 ```
-
 ---
 
 # Crossfire API
@@ -153,9 +152,6 @@ library(jsonlite)
 library(tidyverse)
 
 # asking for the password
-
-get_jwt <- httr::POST("https://api.fogocruzado.org.br/api/v1/auth/login",
-                 query = list(email = "venturat@umd.edu", password = "ptds42420678"))
 
 
 # get the token
@@ -338,9 +334,11 @@ crossfire::fogocruzado_signin(email = "venturat@umd.edu", password = "ptds424206
 
 # Extrair os dados que pegamos manualmente antes
 
-fogocruzado_rj <- crossfire::get_fogocruzado(state= "RJ", security_agent = 1)
 
-fogocruzado_rj
+df <- get_fogocruzado(city = c("Rio de Janeiro", "Recife"),
+                                         initial_date = "2018-07-01", final_date = "2018-12-31")
+
+glimpse(df)
 ```
 
 

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>APIs</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Tiago Ventura" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# APIs
+## IPSA-Flacso Summer School
+### Tiago Ventura
+
+---
+
+
+
+
+# Our plans for today
+
+1. Introduction to APIs
+
+2. Accessing APIs "manually".
+
+3. Using R packages to access APIs.
+    - Twitter API. 
+    
+---
+# Introduction to APIs.
+
+The acronym API corresponds to the term “Application Programming Interface“.
+
+APIs are an online repository built, among other things, to facilitate the exchange of information between data users and the holders.
+
+In the end, you access this repository as you access any website, via URLs. The main difference is that the return is **not an html** and a web page, but **data** in a unestructured format.
+
+&lt;br&gt;
+
+- **Example from Twitter. What would Twitter be like without an API?**
+
+---
+
+## API Uses
+
+There are two main ways in which we academics commonly use APIs.
+
+1. Access data shared by Companies and NGOs. (Twitter, Spotify, Yelp, NYT, Portal da Transparência, IPEA)
+
+2. Process our data in Algorithms developed by third parties. (Perspective API)
+
+- Our focus will be on the first type of APIs.
+
+---
+
+## API usage for data access.
+
+In its simplest form, an API is just a url. See the example below:
+
+`http://mysite.com/key?param_1;param_2`
+
+Main elements:
+ 
+- **http://mysite.com/**: the base of the API, called "the end-point" in most of the documentation.
+
+- **key**: the credentials many sites ask for - not all, as we'll see.
+
+- **?param_1;param_2** parameters, or filters to refine the API search.
+
+To access the API we use the `httr` package. And to clean up the outputs, we'll use several of the `tidyverse` and `jsonlite` functions.
+
+---
+
+# Simple use of APIs.
+
+Let's start with an API in which we don't need to ask for a password. We'll start with a very simple API called [DOG API](https://dog.ceo/dog-api/).
+
+#### Step One: Find Endpoints
+
+Open the website and read the documentation. Endpoints contain the type of information that the API makes available.
+
+#### Step Two: Look for Filters
+
+This API is pretty simple. It has no filters.
+
+#### Step Three: Access via Get.
+
+---
+### Example with GET
+
+
+```r
+library(httr)
+library(tidyverse)
+# Acess the API
+endpoint = "https://dog.ceo/api/breeds/image/random"
+
+acesso = GET(endpoint)
+
+# examine the objects
+class(acesso) 
+```
+
+```
+## [1] "response"
+```
+
+---
+
+## Fourth Step: Access the output using content.
+
+
+```r
+# see the element
+content(acesso)
+```
+
+```
+## $message
+## [1] "https://images.dog.ceo/breeds/ridgeback-rhodesian/n02087394_8903.jpg"
+## 
+## $status
+## [1] "success"
+```
+
+```r
+# Access the content.
+
+link_image &lt;- content(acesso)$message
+download.file(link_image, 
+              destfile = "cao.png")
+```
+
+---
+
+&lt;img src="cao.png" width="80%" /&gt;
+---
+
+# Crossfire API
+
+Let's now use the Crossfire project API as an example. In this case, the API requires credentials. This should always be our first step.
+
+[Here](https://api.fogocruzado.org.br/) you will find the description on how to gain your access password.
+
+
+
+
+```r
+# Activating the packages
+library(httr) 
+library(jsonlite)
+library(tidyverse)
+
+# asking for the password
+
+get_jwt &lt;- httr::POST("https://api.fogocruzado.org.br/api/v1/auth/login",
+                 query = list(email = "venturat@umd.edu", password = "xxxxxxxxxx"))
+
+
+# get the token
+#token &lt;- httr::content(get_jwt)$access_token
+```
+
+---
+
+## API Endpoint
+
+![](figs/base_fogo_cruzado.png)
+
+---
+
+##  API Filters
+In the [documentation](https://api.fogocruzado.org.br/docs/1.0/occurrences), it is indicated that there are three main endpoints for the API: cities, states and occurrences.
+
+Let's start with the cities endpoint, an easy one that doesn't require filters. Open this [documentation] link (https://api.fogocruzado.org.br/docs/1.0/cities)
+
+
+
+```r
+# Step 1: Create the URL
+base_url &lt;- "https://api.fogocruzado.org.br/api/v1"
+cities &lt;- "/cities"
+api &lt;- paste0(base_url, cities)
+print(api) # somente um site
+```
+
+```
+## [1] "https://api.fogocruzado.org.br/api/v1/cities"
+```
+
+---
+
+### GET Request
+
+To ask for the Api data
+
+
+```r
+#  Step 2: Acces the api
+
+response &lt;- GET(api,  
+                add_headers('Authorization' = paste("Bearer", token, sep = " ")))
+
+# Result
+response
+```
+
+```
+## Response [https://api.fogocruzado.org.br/api/v1/cities]
+##   Date: 2021-09-02 00:54
+##   Status: 200
+##   Content-Type: application/json
+##   Size: 6.89 kB
+```
+
+---
+
+## Cleaning the Results
+
+The API output is a JSON file - which is a more efficient type for saving large files - and has a status of 200 - which means your access worked.
+
+
+```r
+# Convert to a json
+json_fogo_cruzado &lt;- content(response, as="text", encoding = "UTF-8")
+```
+
+![](../../content/Tutoriais/figs/json-exemplo.png)
+
+---
+## Cleaning Jsons
+
+
+```r
+# Cleaning Jsons
+output &lt;- fromJSON(json_fogo_cruzado) %&gt;%
+              tibble::as_tibble()
+output
+```
+
+```
+## # A tibble: 36 x 9
+##    CidadeId EstadoId Cidade             CodigoIBGE Gentilico     Populacao  Area
+##       &lt;int&gt;    &lt;int&gt; &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt;             &lt;int&gt; &lt;int&gt;
+##  1     3253       17 Goiana                2606200 "goianense"       75644 44581
+##  2     3185       17 Abreu e Lima          2600054 "abreu-limen…     94429 12619
+##  3     3196       17 Araçoiaba             2601052 "araçoiabens…     18156  9638
+##  4     3215       17 Cabo de Santo Ago…    2602902 "cabense"        185025 44874
+##  5     3221       17 Camaragibe            2603454 "camaragiben…    144466  5126
+##  6     3259       17 Igarassu              2606804 "igarassuano…    102021 30556
+##  7     3261       17 Ilha de Itamaracá     2607604 "itamaracaen…     21884  6668
+##  8     3264       17 Ipojuca               2607208 "ipojuquense"     80637 52711
+##  9     3270       17 Itapissuma            2607752 "itapissumen…     23769  7424
+## 10     3272       17 Jaboatão dos Guar…    2607901 "jaboatãoens…    644620 25869
+## # … with 26 more rows, and 2 more variables: DensidadeDemografica &lt;chr&gt;,
+## #   PIBPrecoCorrente &lt;lgl&gt;
+```
+
+---
+## API with Filters. 
+All real APIs have parameters to filter accesses.
+
+Filters are added as a filter query in the GET function. These filters must be ordered according to the API documentation.
+
+Let's see [here](https://api.fogocruzado.org.br/docs/1.0/occurrences) some examples
+
+---
+## Example of filters
+
+
+```r
+# shootings
+base_url &lt;- "https://api.fogocruzado.org.br/api/v1"
+occurences &lt;- "/occurrences"
+api &lt;- paste0(base_url, occurences)
+print(api)
+```
+
+```
+## [1] "https://api.fogocruzado.org.br/api/v1/occurrences"
+```
+
+```r
+# Build a Query
+query_list &lt;- list(data_ocorrencia="2019-01-01", 
+                   nome_cidade= "Rio de Janeiro")
+# GET
+response &lt;- GET(api,
+                query=query_list,
+              add_headers('Authorization' = paste("Bearer", token, sep = " ")))
+
+output &lt;- jsonlite::fromJSON(httr::content(response, as="text", encoding = "UTF-8")) %&gt;%
+    tibble::as_tibble()
+
+View(output)
+```
+
+---
+
+### Write an entire endpoint.
+
+
+```r
+# url basica de ocorrencias.
+base_url &lt;- "https://api.fogocruzado.org.br/api/v1"
+occurences &lt;- "/occurrences"
+filter= "?data_ocorrencia[gt]=2019-01-01&amp;data_ocorrencia[lt]=2019-05-01&amp;CidadeID[]=3661"
+api &lt;- paste0(base_url, occurences, filter)
+print(api)
+```
+
+```
+## [1] "https://api.fogocruzado.org.br/api/v1/occurrences?data_ocorrencia[gt]=2019-01-01&amp;data_ocorrencia[lt]=2019-05-01&amp;CidadeID[]=3661"
+```
+
+```r
+# GET
+response &lt;- GET(api,
+              add_headers('Authorization' = paste("Bearer", token, sep = " ")))
+
+output &lt;- jsonlite::fromJSON(httr::content(response, as="text", encoding = "UTF-8")) %&gt;%
+    tibble::as_tibble()
+
+output
+```
+
+```
+## # A tibble: 3,334 x 67
+##    id_ocorrencia local_ocorrencia             latitude_ocorren… longitude_ocorr…
+##            &lt;int&gt; &lt;chr&gt;                                    &lt;dbl&gt;            &lt;dbl&gt;
+##  1         26653 Parque Sao Jose, Belford Ro…             -22.7            -43.3
+##  2         24842 Malvinas, Vila Kennedy - Ba…             -22.9            -43.5
+##  3         23155 R. Carbonita - Bráz De Pina…             -22.8            -43.3
+##  4         23157 Pavão-Pavãozinho, Copacaban…             -23.0            -43.2
+##  5         23158 R. Miguel Cervantes - Cacha…             -22.9            -43.3
+##  6         23159 Senador Camará, Rio de Jane…             -22.9            -43.5
+##  7         23162 R. Mario Behring - Vila Ros…             -22.7            -43.3
+##  8         23163 R. Miguel Cervantes - Cacha…             -22.9            -43.3
+##  9         23169 Copacabana - Copacabana, Ri…             -23.0            -43.2
+## 10         23170 Mangueirinha, Periquitos, D…             -22.8            -43.3
+## # … with 3,324 more rows, and 63 more variables: data_ocorrencia &lt;chr&gt;,
+## #   hora_ocorrencia &lt;chr&gt;, presen_agen_segur_ocorrencia &lt;int&gt;,
+## #   qtd_morto_civil_ocorrencia &lt;int&gt;, qtd_morto_agen_segur_ocorrencia &lt;int&gt;,
+## #   qtd_ferido_civil_ocorrencia &lt;int&gt;, qtd_ferido_agen_segur_ocorrencia &lt;int&gt;,
+## #   estado_id &lt;int&gt;, cidade_id &lt;int&gt;, nome_cidade &lt;chr&gt;, cod_ibge_cidade &lt;int&gt;,
+## #   gentilico_cidade &lt;chr&gt;, populacao_cidade &lt;int&gt;, area_cidade &lt;int&gt;,
+## #   densidade_demo_cidade &lt;chr&gt;, nome_estado &lt;chr&gt;, uf_estado &lt;chr&gt;,
+## #   cod_ibge_estado &lt;int&gt;, homem_qtd_mortos_oc &lt;int&gt;,
+## #   homem_qtd_feridos_oc &lt;int&gt;, mulher_qtd_mortos_oc &lt;int&gt;,
+## #   mulher_qtd_feridos_oc &lt;int&gt;, chacina_oc &lt;int&gt;, chacina_qtd_mortos_oc &lt;int&gt;,
+## #   chacina_unidades_policiais_oc &lt;chr&gt;, ag_seguranca_vitima_oc &lt;int&gt;,
+## #   ag_seguranca_mortos_status_oc &lt;chr&gt;, ag_seguranca_feridos_status_oc &lt;chr&gt;,
+## #   bala_perdida_oc &lt;int&gt;, bala_perdida_qtd_mortos_oc &lt;int&gt;,
+## #   bala_perdida_qtd_feridos_oc &lt;int&gt;, interior_residencia_oc &lt;int&gt;,
+## #   interior_residencia_qtd_mortos_oc &lt;int&gt;,
+## #   interior_residencia_qtd_feridos_oc &lt;int&gt;, imediacao_ensino_oc &lt;int&gt;,
+## #   imediacao_ensino_qtd_mortos_oc &lt;int&gt;,
+## #   imediacao_ensino_qtd_feridos_oc &lt;int&gt;, vitima_crianca_oc &lt;int&gt;,
+## #   vitima_crianca_qtd_mortos_oc &lt;int&gt;, info_adicional_crianca_morta_oc &lt;chr&gt;,
+## #   vitima_crianca_qtd_feridos_oc &lt;int&gt;,
+## #   info_adicional_crianca_ferida_oc &lt;chr&gt;, vitima_adolescente_oc &lt;int&gt;,
+## #   vitima_adolescente_qtd_mortos_oc &lt;int&gt;,
+## #   info_adicional_adolescente_morto_oc &lt;chr&gt;,
+## #   vitima_adolescente_qtd_feridos_oc &lt;int&gt;,
+## #   info_adicional_adolescente_ferido_oc &lt;chr&gt;, vitima_idoso_oc &lt;int&gt;,
+## #   vitima_idoso_qtd_mortos_oc &lt;int&gt;, info_adicional_idoso_morto_oc &lt;chr&gt;,
+## #   vitima_idoso_qtd_feridos_oc &lt;int&gt;, info_adicional_idoso_ferido_oc &lt;chr&gt;,
+## #   informacao_transporte_oc &lt;int&gt;, descricao_transporte_interrompido_oc &lt;chr&gt;,
+## #   data_interrupcao_transporte_oc &lt;chr&gt;, data_liberacao_transporte_oc &lt;chr&gt;,
+## #   informacao_via_oc &lt;int&gt;, descricao_via_interrompida_oc &lt;chr&gt;,
+## #   data_interrupcao_via_oc &lt;chr&gt;, data_liberacao_via_oc &lt;chr&gt;,
+## #   outros_recortes &lt;chr&gt;, motivo_principal &lt;chr&gt;, motivo_complementar &lt;chr&gt;
+```
+
+
+---
+class: center, inverse, middle
+
+## Have we chacked if there exists any package to do all this work for us?
+
+---
+
+## Crossfire
+
+This [link](https://github.com/voltdatalab/crossfire) contains the R package website, and recommendations on how to use it. The installation follows:
+
+
+```r
+#Instalation
+install.packages("devtools") # pacote para acessar o github
+devtools::install_github("voltdatalab/crossfire")
+```
+
+
+```r
+library(crossfire)
+
+# Tell you user
+
+fogocruzado_signin(email = "venturat@umd.edu", password = "xxxxxx")
+
+# Extract the data (same thing we did before)
+
+fogocruzado_rj &lt;- get_fogocruzado(state= "RJ", security_agent = 1)
+```
+
+
+
+```
+## Rows: 3,245
+## Columns: 67
+## $ id_ocorrencia                        &lt;int&gt; 22275, 19737, 16450, 19193, 16279…
+## $ local_ocorrencia                     &lt;chr&gt; "Cidade Alta - Cordovil, Rio de J…
+## $ latitude_ocorrencia                  &lt;dbl&gt; -22.81983, -22.98798, -22.88180, …
+## $ longitude_ocorrencia                 &lt;dbl&gt; -43.29491, -43.24798, -43.26849, …
+## $ data_ocorrencia                      &lt;chr&gt; "2018-12-05 06:29:00", "2018-09-2…
+## $ hora_ocorrencia                      &lt;chr&gt; "6:29:00", "4:00:00", "16:58:00",…
+## $ presen_agen_segur_ocorrencia         &lt;int&gt; 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, …
+## $ qtd_morto_civil_ocorrencia           &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ qtd_morto_agen_segur_ocorrencia      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ qtd_ferido_civil_ocorrencia          &lt;int&gt; 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, …
+## $ qtd_ferido_agen_segur_ocorrencia     &lt;int&gt; 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ estado_id                            &lt;int&gt; 19, 19, 19, 19, 19, 19, 19, 19, 1…
+## $ cidade_id                            &lt;int&gt; 3661, 3661, 3661, 3661, 3661, 366…
+## $ nome_cidade                          &lt;chr&gt; "Rio de Janeiro", "Rio de Janeiro…
+## $ cod_ibge_cidade                      &lt;chr&gt; "3304557", "3304557", "3304557", …
+## $ gentilico_cidade                     &lt;chr&gt; "carioca", "carioca", "carioca", …
+## $ populacao_cidade                     &lt;int&gt; 6320446, 6320446, 6320446, 632044…
+## $ area_cidade                          &lt;int&gt; 119746, 119746, 119746, 119746, 1…
+## $ densidade_demo_cidade                &lt;dbl&gt; 5.27, 5.27, 5.27, 5.27, 5.27, 5.2…
+## $ nome_estado                          &lt;chr&gt; "Rio de Janeiro", "Rio de Janeiro…
+## $ uf_estado                            &lt;chr&gt; "RJ", "RJ", "RJ", "RJ", "RJ", "RJ…
+## $ cod_ibge_estado                      &lt;chr&gt; "33", "33", "33", "33", "33", "33…
+## $ homem_qtd_mortos_oc                  &lt;int&gt; 0, 0, NA, NA, NA, NA, NA, NA, NA,…
+## $ homem_qtd_feridos_oc                 &lt;int&gt; 1, 0, 2, NA, NA, NA, 1, NA, NA, N…
+## $ mulher_qtd_mortos_oc                 &lt;int&gt; 0, 0, NA, NA, NA, NA, NA, NA, NA,…
+## $ mulher_qtd_feridos_oc                &lt;int&gt; 0, 0, NA, NA, NA, NA, NA, NA, NA,…
+## $ chacina_oc                           &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ chacina_qtd_mortos_oc                &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ chacina_unidades_policiais_oc        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ ag_seguranca_vitima_oc               &lt;int&gt; NA, NA, 1, NA, NA, NA, NA, NA, NA…
+## $ ag_seguranca_mortos_status_oc        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ ag_seguranca_feridos_status_oc       &lt;chr&gt; NA, NA, "Em serviço", NA, NA, NA,…
+## $ bala_perdida_oc                      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ bala_perdida_qtd_mortos_oc           &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ bala_perdida_qtd_feridos_oc          &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ interior_residencia_oc               &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ interior_residencia_qtd_mortos_oc    &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ interior_residencia_qtd_feridos_oc   &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ imediacao_ensino_oc                  &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ imediacao_ensino_qtd_mortos_oc       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ imediacao_ensino_qtd_feridos_oc      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_crianca_oc                    &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_crianca_qtd_mortos_oc         &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ info_adicional_crianca_morta_oc      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_crianca_qtd_feridos_oc        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ info_adicional_crianca_ferida_oc     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_adolescente_oc                &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_adolescente_qtd_mortos_oc     &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ info_adicional_adolescente_morto_oc  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_adolescente_qtd_feridos_oc    &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ info_adicional_adolescente_ferido_oc &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_idoso_oc                      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_idoso_qtd_mortos_oc           &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ info_adicional_idoso_morto_oc        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ vitima_idoso_qtd_feridos_oc          &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ info_adicional_idoso_ferido_oc       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ informacao_transporte_oc             &lt;int&gt; NA, NA, 1, NA, NA, NA, NA, NA, NA…
+## $ descricao_transporte_interrompido_oc &lt;chr&gt; NA, NA, "Supervia-", NA, NA, NA, …
+## $ data_interrupcao_transporte_oc       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ data_liberacao_transporte_oc         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ informacao_via_oc                    &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ descricao_via_interrompida_oc        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ data_interrupcao_via_oc              &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ data_liberacao_via_oc                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ outros_recortes                      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ motivo_principal                     &lt;chr&gt; "Ação policial", "Operação Polici…
+## $ motivo_complementar                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, N…
+```
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
